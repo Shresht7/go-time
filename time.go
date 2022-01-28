@@ -8,7 +8,7 @@ import (
 //	Show the time
 func showTime(now time.Time) {
 
-	//	Format hours, minutes, seconds
+	//	Get hours, minutes, seconds
 	h, m, s := now.Clock()
 	hour, min, sec := fmt.Sprintf("%d", h), fmt.Sprintf("%d", m), fmt.Sprintf("%d", s)
 	if len(hour) == 1 {
@@ -21,10 +21,8 @@ func showTime(now time.Time) {
 		sec = fmt.Sprintf("0%s", sec)
 	}
 
-	//	Format weekday
+	//	Get Date
 	weekday := now.Weekday()
-
-	//	Format day, month and year
 	year, month, day := now.Date()
 
 	//	Print to stdout

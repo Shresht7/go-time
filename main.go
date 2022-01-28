@@ -6,10 +6,9 @@ import (
 )
 
 func main() {
-	args := os.Args[1:]
-	command := args[0]
-
 	now := time.Now()
+
+	command := os.Args[1]
 
 	switch command {
 	case "time":

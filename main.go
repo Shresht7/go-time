@@ -1,7 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"os"
+	"time"
+)
 
 func main() {
-	fmt.Println("Hello World!")
+	args := os.Args[1:]
+	command := args[0]
+
+	now := time.Now()
+
+	switch command {
+	case "time":
+		showTime(now)
+	case "date":
+		showDate(now)
+	case "calendar":
+		showCalendar(now)
+	}
 }

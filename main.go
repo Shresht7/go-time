@@ -18,10 +18,6 @@ func main() {
 
 	case "clock":
 		showClock(now)
-	case "now":
-		showClock(now)
-	case "time":
-		showClock(now)
 
 	//	----
 	//	DATE
@@ -36,5 +32,18 @@ func main() {
 
 	case "calendar":
 		showCalendar(now)
+
+	//	----
+	//	TIME
+	//	----
+
+	case "now":
+		showTime(now)
+	case "time":
+		showTime(now)
+	default:
+		showTime(now)
+
 	}
+
 }

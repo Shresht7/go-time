@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"time"
 )
 
@@ -21,11 +22,21 @@ func NewCalendar(now time.Time) Calendar {
 	year := now.Year()
 
 	grid := [6][]string{}
-	grid[0] = WEEKDAYS
-	for i := 1; i < len(grid); i++ {
-		grid[i] = []string{}
-		for j := 1; j < 8; j++ {
-			grid[i] = append(grid[i], fmt.Sprintf("%d%d", i, j))
+	for c := 0; c < 7; c++ {
+		grid[0] = append(grid[0], fmt.Sprintf("%2s", WEEKDAYS[c]))
+	}
+
+	firstDay := time.Date(year, month, 1, 0, 0, 0, 0, now.Location()).Day()
+
+	for r := 1; r < len(grid); r++ {
+		grid[r] = []string{}
+		for c := 1; c < 8; c++ {
+			date := time.Date(year, month, c+((r-1)*7)-firstDay, 0, 0, 0, 0, now.Location())
+			str := fmt.Sprintf("%2d", date.Day())
+			if date.Month() != month {
+				str = fmt.Sprintf("~%s", str)
+			}
+			grid[r] = append(grid[r], str)
 		}
 	}
 
@@ -35,18 +46,21 @@ func NewCalendar(now time.Time) Calendar {
 //	Print the calendar to the screen
 func (cal *Calendar) show() {
 	fmt.Printf("\n%11s %d\n", cal.month, cal.year)
+
 	for _, row := range cal.grid {
-		for r, date := range row {
-			str := ""
-			if r == 6 {
-				str = fmt.Sprintf("\u001b[31m%2s \u001b[39m", date)
-			} else {
-				str = fmt.Sprintf("%2s ", date)
+		for c, date := range row {
+			str := date
+			if strings.HasPrefix(str, "~") {
+				str = str[1:]
+				str = fmt.Sprintf("\u001b[2m%s\u001b[22m", str)
 			}
-			if date == cal.date {
-				str = fmt.Sprintf("\u001b[7m%2s\u001b[27m ", date)
+			if c == 6 {
+				str = fmt.Sprintf("\u001b[31m%2s\u001b[39m", str)
 			}
-			fmt.Print(str)
+			if strings.TrimSpace(date) == strings.TrimSpace(cal.date) {
+				str = fmt.Sprintf("\u001b[7m%2s\u001b[27m", str)
+			}
+			fmt.Print(str + " ")
 		}
 		fmt.Print("\n")
 	}

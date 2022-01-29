@@ -6,7 +6,7 @@ import (
 )
 
 //	Show the time
-func showTime(now time.Time) {
+func showClock(now time.Time) {
 
 	//	Get hours, minutes, seconds
 	h, m, s := now.Clock()

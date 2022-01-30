@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 )
 
@@ -9,7 +10,7 @@ func getClock(now time.Time) (hours, minutes, seconds string) {
 	h, m, s := now.Clock() //	Get hours, minutes and seconds
 
 	//	Format hours, minutes and seconds
-	hours, minutes, seconds = fmt.Sprintf("%d", h), fmt.Sprintf("%d", m), fmt.Sprintf("%d", s)
+	hours, minutes, seconds = strconv.Itoa(h), strconv.Itoa(m), strconv.Itoa(s)
 	if len(hours) == 1 {
 		hours = fmt.Sprintf("0%s", hours)
 	}

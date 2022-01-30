@@ -3,6 +3,8 @@
 
 A command-line interface to show time.
 
+![calendar](/screenshot.png)
+
 ## Commands
 
 ### clock
@@ -10,7 +12,7 @@ A command-line interface to show time.
 Shows the clock
 
 ```sh
-gotime clock
+go-time clock
 ```
 
 ### date
@@ -18,7 +20,7 @@ gotime clock
 Shows the current date
 
 ```sh
-gotime date
+go-time date
 ```
 
 ### calendar
@@ -26,7 +28,7 @@ gotime date
 Shows the calendar
 
 ```sh
-gotime calendar
+go-time calendar
 ```
 
 ### time
@@ -34,5 +36,5 @@ gotime calendar
 Shows the current time
 
 ```sh
-gotime time
+go-time time
 ```

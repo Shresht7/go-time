@@ -2,8 +2,12 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 	"time"
+
+	"github.com/Shresht7/go-cli-tools/colors"
+	"github.com/Shresht7/go-cli-tools/styles"
 )
 
 var WEEKDAYS = []string{"M", "T", "W", "T", "F", "S", "S"}
@@ -17,7 +21,7 @@ type Calendar struct {
 
 //	Creates a new Calendar
 func NewCalendar(now time.Time) Calendar {
-	date := fmt.Sprintf("%d", now.Day())
+	date := strconv.Itoa(now.Day())
 	month := now.Month()
 	year := now.Year()
 
@@ -66,17 +70,17 @@ func (cal *Calendar) show() {
 			//	If prefixed with ~ (date not of this month), reduce brightness
 			if strings.HasPrefix(str, "~") {
 				str = str[1:]
-				str = fmt.Sprintf("\u001b[2m%s\u001b[22m", str)
+				str = styles.Faint(str)
 			}
 
 			//	If sunday column, color it red
 			if c == 6 {
-				str = fmt.Sprintf("\u001b[31m%2s\u001b[39m", str)
+				str = colors.Red(fmt.Sprintf("%2s", str))
 			}
 
 			//	If today, invert color
 			if strings.TrimSpace(date) == strings.TrimSpace(cal.date) {
-				str = fmt.Sprintf("\u001b[7m%2s\u001b[27m", str)
+				str = styles.Inverse(fmt.Sprintf("%2s", str))
 			}
 
 			//	Spacing

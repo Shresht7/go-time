@@ -42,6 +42,9 @@ func run(args []string, stdout io.Writer) error {
 	case "calendar":
 		cmd.ShowCalendar(now)
 
+	case "stopwatch":
+		tui.ShowStopwatch()
+
 	default:
 		cmd.ShowTime(now)
 

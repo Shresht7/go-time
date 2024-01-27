@@ -33,7 +33,7 @@ func run(args []string, stdout io.Writer) error {
 		cmd.ShowTime(now)
 
 	case "clock":
-		showClock(now)
+		cmd.ShowClock(now)
 
 	case "date":
 		showDate(now)

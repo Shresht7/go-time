@@ -1,6 +1,7 @@
-package cmd
+package tui
 
 import (
+	"fmt"
 	"time"
 
 	tea "github.com/charmbracelet/bubbletea"
@@ -22,7 +23,9 @@ func (c *ClockModel) Init() tea.Cmd {
 func (c *ClockModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case msgTick:
-		c.Hours, c.Minutes, c.Seconds = getClock(msg.time)
+		c.Hours = fmt.Sprintf("%2d", msg.time.Hour())
+		c.Minutes = fmt.Sprintf("%2d", msg.time.Minute())
+		c.Seconds = fmt.Sprintf("%2d", msg.time.Second())
 		return c, ticker(time.Second)
 	case tea.KeyMsg:
 		switch msg.String() {

@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/Shresht7/go-time/cmd"
+	"github.com/Shresht7/go-time/tui"
 )
 
 // ---
@@ -33,7 +34,7 @@ func run(args []string, stdout io.Writer) error {
 		cmd.ShowTime(now)
 
 	case "clock":
-		cmd.ShowClock()
+		tui.ShowClock()
 
 	case "date":
 		cmd.ShowDate(now)

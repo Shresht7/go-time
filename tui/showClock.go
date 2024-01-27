@@ -21,6 +21,18 @@ func (c *ClockModel) formatTime() (hours, minutes, seconds string) {
 	return fmt.Sprintf("%02d", h), fmt.Sprintf("%02d", m), fmt.Sprintf("%02d", s)
 }
 
+func (c *ClockModel) Icon() string {
+	hour := c.t.Hour()
+	switch {
+	case hour >= 6 && hour < 12:
+		return "🌄"
+	case hour >= 12 && hour < 18:
+		return "☀️"
+	default:
+		return "🌙"
+	}
+}
+
 func (c *ClockModel) Init() tea.Cmd {
 	c.t = time.Now()           // initialize the time immediately on startup
 	return ticker(time.Second) // start the ticker to update the clock every second
@@ -41,8 +53,14 @@ func (c *ClockModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (c *ClockModel) View() string {
+	s := "\n"
+
+	s += c.Icon()
+
 	hours, minutes, seconds := c.formatTime()
-	return "\n" + hours + ":" + minutes + ":" + seconds + "\n\n"
+	s += " " + hours + ":" + minutes + ":" + seconds + "\n\n"
+
+	return s
 }
 
 // SHOW CLOCK COMMAND

@@ -11,21 +11,25 @@ import (
 // --------------------------
 
 type ClockModel struct {
-	Hours   string
-	Minutes string
-	Seconds string
+	t time.Time
+}
+
+func (c *ClockModel) formatTime() (hours, minutes, seconds string) {
+	h := c.t.Hour()
+	m := c.t.Minute()
+	s := c.t.Second()
+	return fmt.Sprintf("%02d", h), fmt.Sprintf("%02d", m), fmt.Sprintf("%02d", s)
 }
 
 func (c *ClockModel) Init() tea.Cmd {
-	return ticker(time.Second)
+	c.t = time.Now()           // initialize the time immediately on startup
+	return ticker(time.Second) // start the ticker to update the clock every second
 }
 
 func (c *ClockModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case msgTick:
-		c.Hours = fmt.Sprintf("%2d", msg.time.Hour())
-		c.Minutes = fmt.Sprintf("%2d", msg.time.Minute())
-		c.Seconds = fmt.Sprintf("%2d", msg.time.Second())
+		c.t = msg.time
 		return c, ticker(time.Second)
 	case tea.KeyMsg:
 		switch msg.String() {
@@ -37,7 +41,8 @@ func (c *ClockModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (c *ClockModel) View() string {
-	return "\n" + c.Hours + ":" + c.Minutes + ":" + c.Seconds + "\n\n"
+	hours, minutes, seconds := c.formatTime()
+	return "\n" + hours + ":" + minutes + ":" + seconds + "\n\n"
 }
 
 // SHOW CLOCK COMMAND

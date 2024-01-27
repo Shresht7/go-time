@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"fmt"
@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Shresht7/go-cli-tools/colors"
-	"github.com/Shresht7/go-cli-tools/styles"
+	"github.com/Shresht7/go-cli-tools/ansi/colors"
+	"github.com/Shresht7/go-cli-tools/ansi/styles"
 )
 
 var WEEKDAYS = []string{"M", "T", "W", "T", "F", "S", "S"}
@@ -19,7 +19,7 @@ type Calendar struct {
 	grid  [6][]string
 }
 
-//	Creates a new Calendar
+// Creates a new Calendar
 func NewCalendar(now time.Time) Calendar {
 	date := strconv.Itoa(now.Day())
 	month := now.Month()
@@ -56,7 +56,7 @@ func NewCalendar(now time.Time) Calendar {
 	return Calendar{date: date, month: month, year: year, grid: grid}
 }
 
-//	Print the calendar to the screen
+// Print the calendar to the screen
 func (cal *Calendar) show() {
 
 	//	Print month and calendar
@@ -95,8 +95,8 @@ func (cal *Calendar) show() {
 
 }
 
-//	Show calendar command
-func showCalendar(now time.Time) {
+// Show calendar command
+func ShowCalendar(now time.Time) {
 	calendar := NewCalendar(now)
 	calendar.show()
 }

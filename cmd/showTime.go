@@ -1,12 +1,12 @@
-package main
+package cmd
 
 import (
 	"fmt"
 	"time"
 )
 
-//	Show the time
-func showTime(now time.Time) {
+// Shows the current time
+func ShowTime(now time.Time) {
 
 	hours, minutes, seconds := getClock(now)
 	weekday := now.Weekday()

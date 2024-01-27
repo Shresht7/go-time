@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"fmt"
@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// Returns the current time in the format "HH:MM:SS"
 func getClock(now time.Time) (hours, minutes, seconds string) {
 	h, m, s := now.Clock() //	Get hours, minutes and seconds
 

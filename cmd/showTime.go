@@ -12,6 +12,6 @@ func ShowTime(now time.Time) {
 	weekday := now.Weekday()
 	year, month, day := now.Date()
 
-	fmt.Printf("\n%s:%s:%s  %s  %d %s %d\n\n", hours, minutes, seconds, weekday, day, month, year)
+	fmt.Printf("\n%s:%s:%s  •  %s  •  %d %s %d\n\n", hours, minutes, seconds, weekday, day, month, year)
 
 }

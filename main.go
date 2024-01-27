@@ -1,11 +1,29 @@
 package main
 
 import (
+	"fmt"
+	"io"
 	"os"
 	"time"
 )
 
+// ----
+// MAIN
+// ----
+
 func main() {
+	if err := run(os.Args, os.Stdout); err != nil {
+		fmt.Fprintf(os.Stderr, "%s\n", err)
+		os.Exit(1)
+	}
+}
+
+// ---
+// RUN
+// ---
+
+func run(args []string, stdout io.Writer) error {
+
 	now := time.Now() //	Get the current time
 
 	//	If no command was passed, then show time and exit.
@@ -52,4 +70,6 @@ func main() {
 
 	}
 
+	// 	Exit with success
+	return nil
 }

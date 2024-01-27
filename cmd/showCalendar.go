@@ -29,7 +29,7 @@ func NewCalendarMonth(t time.Time) *calendarMonth {
 	}
 
 	// Get the first day of the month
-	firstDay := time.Date(t.Year(), t.Month(), 1, 0, 0, 0, 0, t.Location()).Day() //	First day of the month
+	firstDay := time.Date(t.Year(), t.Month(), 1, 0, 0, 0, 0, t.Location()).Weekday() //	First day of the month
 
 	//	Add dates to calendar grid
 	for r := 1; r < len(grid); r++ {
@@ -37,7 +37,7 @@ func NewCalendarMonth(t time.Time) *calendarMonth {
 		for c := 1; c < 8; c++ {
 
 			//	Get date of month
-			d := time.Date(t.Year(), t.Month(), c+((r-1)*7)-firstDay, 0, 0, 0, 0, t.Location())
+			d := time.Date(t.Year(), t.Month(), c+((r-1)*7)-int(firstDay), 0, 0, 0, 0, t.Location())
 			str := fmt.Sprintf("%2d", d.Day())
 
 			//	If date is of previous or next month then prefix with ~. Used later for special formatting

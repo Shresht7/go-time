@@ -1,4 +1,4 @@
-module github.com/Shresht7/Go-Time
+module github.com/Shresht7/go-time
 
 go 1.21.6
 

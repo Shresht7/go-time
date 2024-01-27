@@ -1,5 +1,4 @@
-# Go-Time
----------
+# `go-time`
 
 A command-line interface to show time.
 

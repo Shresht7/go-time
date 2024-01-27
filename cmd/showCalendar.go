@@ -12,18 +12,13 @@ import (
 
 var WEEKDAYS = []string{"M", "T", "W", "T", "F", "S", "S"}
 
-type Calendar struct {
-	date  string
-	month time.Month
-	year  int
-	grid  [6][]string
+type calendarMonth struct {
+	t    time.Time
+	grid [6][]string
 }
 
 // Creates a new Calendar
-func NewCalendar(now time.Time) Calendar {
-	date := strconv.Itoa(now.Day())
-	month := now.Month()
-	year := now.Year()
+func NewCalendarMonth(t time.Time) *calendarMonth {
 
 	//	Grid to hold dates
 	grid := [6][]string{}
@@ -33,7 +28,8 @@ func NewCalendar(now time.Time) Calendar {
 		grid[0] = append(grid[0], fmt.Sprintf("%2s", WEEKDAYS[c]))
 	}
 
-	firstDay := time.Date(year, month, 1, 0, 0, 0, 0, now.Location()).Day() //	First day of the month
+	// Get the first day of the month
+	firstDay := time.Date(t.Year(), t.Month(), 1, 0, 0, 0, 0, t.Location()).Day() //	First day of the month
 
 	//	Add dates to calendar grid
 	for r := 1; r < len(grid); r++ {
@@ -41,11 +37,11 @@ func NewCalendar(now time.Time) Calendar {
 		for c := 1; c < 8; c++ {
 
 			//	Get date of month
-			d := time.Date(year, month, c+((r-1)*7)-firstDay, 0, 0, 0, 0, now.Location())
+			d := time.Date(t.Year(), t.Month(), c+((r-1)*7)-firstDay, 0, 0, 0, 0, t.Location())
 			str := fmt.Sprintf("%2d", d.Day())
 
 			//	If date is of previous or next month then prefix with ~. Used later for special formatting
-			if d.Month() != month {
+			if d.Month() != t.Month() {
 				str = fmt.Sprintf("~%s", str)
 			}
 
@@ -53,14 +49,14 @@ func NewCalendar(now time.Time) Calendar {
 		}
 	}
 
-	return Calendar{date: date, month: month, year: year, grid: grid}
+	return &calendarMonth{t, grid}
 }
 
 // Print the calendar to the screen
-func (cal *Calendar) show() {
+func (cal *calendarMonth) show() {
 
 	//	Print month and calendar
-	fmt.Printf("\n%11s %d\n", cal.month, cal.year)
+	fmt.Printf("\n%11s %d\n", cal.t.Month(), cal.t.Year())
 
 	for _, row := range cal.grid {
 		for c, date := range row {
@@ -79,7 +75,7 @@ func (cal *Calendar) show() {
 			}
 
 			//	If today, invert color
-			if strings.TrimSpace(date) == strings.TrimSpace(cal.date) {
+			if strings.TrimSpace(date) == strings.TrimSpace(strconv.Itoa(cal.t.Day())) {
 				str = styles.Inverse(fmt.Sprintf("%2s", str))
 			}
 
@@ -97,6 +93,6 @@ func (cal *Calendar) show() {
 
 // Show calendar command
 func ShowCalendar(now time.Time) {
-	calendar := NewCalendar(now)
+	calendar := NewCalendarMonth(now)
 	calendar.show()
 }

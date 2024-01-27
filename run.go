@@ -39,7 +39,7 @@ func run(args []string, stdout io.Writer) error {
 		cmd.ShowDate(now)
 
 	case "calendar":
-		showCalendar(now)
+		cmd.ShowCalendar(now)
 
 	default:
 		cmd.ShowTime(now)

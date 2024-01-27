@@ -65,14 +65,14 @@ func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case msgStart:
 		m.start = msg.t
 		m.running = true
-		m.keys.Space.SetHelp("<spacebar>", "Stop")
+		m.keys.Space.SetHelp("<spacebar>", "stop")
 		return m, nil
 
 	// Stopwatch Stop
 	case msgStop:
 		m.end = time.Now()
 		m.running = false
-		m.keys.Space.SetHelp("<spacebar>", "Start")
+		m.keys.Space.SetHelp("<spacebar>", "start")
 		return m, nil
 
 	// Stopwatch Tick
@@ -159,18 +159,18 @@ type KeyMap struct {
 }
 
 var DefaultKeyMap = KeyMap{
-	Space: key.NewBinding(key.WithKeys("s", " "), key.WithHelp("<spacebar>", "Start")),
-	Quit:  key.NewBinding(key.WithKeys("q", "esc", "ctrl+c"), key.WithHelp("q", "Quit")),
+	Space: key.NewBinding(key.WithKeys("s", " "), key.WithHelp("<spacebar>", "start")),
+	Quit:  key.NewBinding(key.WithKeys("q", "esc", "ctrl+c"), key.WithHelp("q", "quit")),
 }
 
 // ShortHelp returns a slice of key bindings that are used in the short help
 func (k KeyMap) ShortHelp() []key.Binding {
-	return []key.Binding{k.Space, k.Quit}
+	return []key.Binding{k.Quit, k.Space}
 }
 
 // FullHelp returns a slice of key bindings that are used in the full help
 func (k KeyMap) FullHelp() [][]key.Binding {
 	return [][]key.Binding{
-		{k.Space, k.Quit},
+		{k.Quit, k.Space},
 	}
 }

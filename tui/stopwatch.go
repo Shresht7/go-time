@@ -79,6 +79,13 @@ func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.keys.Space.SetHelp("<spacebar>", "stop")
 		return m, nil
 
+	// Stopwatch Stop
+	case msgStop:
+		m.end = time.Now()
+		m.running = false
+		m.keys.Space.SetHelp("<spacebar>", "start")
+		return m, nil
+
 	// Stopwatch Resume
 	case msgResume:
 		m.start = time.Now().Add(-m.elapsed)
@@ -89,13 +96,6 @@ func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	// Stopwatch Reset
 	case msgReset:
 		m.elapsed = 0
-		m.running = false
-		m.keys.Space.SetHelp("<spacebar>", "start")
-		return m, nil
-
-	// Stopwatch Stop
-	case msgStop:
-		m.end = time.Now()
 		m.running = false
 		m.keys.Space.SetHelp("<spacebar>", "start")
 		return m, nil
@@ -166,18 +166,23 @@ func ShowStopwatch() {
 // A message to start the stopwatch
 type msgStart struct{ t time.Time }
 
+// A message to stop the stopwatch
+type msgStop struct{}
+
 // A message to resume the stopwatch
 type msgResume struct{}
 
 // A message to reset the stopwatch
 type msgReset struct{}
 
-// A message to stop the stopwatch
-type msgStop struct{}
-
 // A command to start the stopwatch
 func (m *stopwatchModel) Start() tea.Msg {
 	return msgStart{time.Now()}
+}
+
+// A command to stop the stopwatch
+func (m *stopwatchModel) Stop() tea.Msg {
+	return msgStop{}
 }
 
 // A command to resume the stopwatch
@@ -188,11 +193,6 @@ func (m *stopwatchModel) Resume() tea.Msg {
 // A command to reset the stopwatch
 func (m *stopwatchModel) Reset() tea.Msg {
 	return msgReset{}
-}
-
-// A command to stop the stopwatch
-func (m *stopwatchModel) Stop() tea.Msg {
-	return msgStop{}
 }
 
 // KEYBINDINGS

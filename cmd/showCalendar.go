@@ -56,7 +56,7 @@ func NewCalendarMonth(t time.Time) *calendarMonth {
 func (cal *calendarMonth) show() {
 
 	//	Print month and calendar
-	fmt.Printf("\n%11s %d\n", cal.t.Month(), cal.t.Year())
+	fmt.Printf(styles.Bold("\n%11s %d\n\n"), cal.t.Month(), cal.t.Year())
 
 	for _, row := range cal.grid {
 		for c, date := range row {

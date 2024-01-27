@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Shresht7/go-cli-tools/colors"
-	"github.com/Shresht7/go-cli-tools/styles"
+	"github.com/Shresht7/go-cli-tools/ansi/colors"
+	"github.com/Shresht7/go-cli-tools/ansi/styles"
 )
 
 var WEEKDAYS = []string{"M", "T", "W", "T", "F", "S", "S"}

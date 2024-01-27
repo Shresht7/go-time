@@ -1,6 +1,7 @@
 package tui
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/charmbracelet/bubbles/help"
@@ -41,6 +42,15 @@ func NewStopwatchModel() *stopwatchModel {
 		keys: DefaultKeyMap,
 		help: help.New(),
 	}
+}
+
+// Returns the elapsed time as a string in the format "HH:MM:SS:MS"
+func (m *stopwatchModel) Elapsed() string {
+	hours := int(m.elapsed.Hours()) % 24
+	minutes := int(m.elapsed.Minutes()) % 60
+	seconds := int(m.elapsed.Seconds()) % 60
+	millisecond := int(m.elapsed.Milliseconds() % 1000)
+	return fmt.Sprintf("%02dh : %02dm : %02ds : %03dms", hours, minutes, seconds, millisecond)
 }
 
 // INIT, UPDATE, VIEW
@@ -112,7 +122,7 @@ var styles = lipgloss.NewStyle()
 func (m *stopwatchModel) View() string {
 	s := "\n"
 
-	time := m.elapsed.Truncate(TICK_SPEED).String()
+	time := m.Elapsed()
 	s += styles.Render(time) + "\n\n"
 
 	s += m.help.View(m.keys)

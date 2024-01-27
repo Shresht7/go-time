@@ -25,7 +25,7 @@ func NewCalendarMonth(t time.Time) *calendarMonth {
 
 	//	Add weekday headers
 	for c := 0; c < 7; c++ {
-		grid[0] = append(grid[0], fmt.Sprintf("%2s", WEEKDAYS[c]))
+		grid[0] = append(grid[0], fmt.Sprintf(styles.Bold("%2s"), WEEKDAYS[c]))
 	}
 
 	// Get the first day of the month

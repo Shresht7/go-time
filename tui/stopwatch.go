@@ -3,6 +3,8 @@ package tui
 import (
 	"time"
 
+	"github.com/charmbracelet/bubbles/help"
+	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
@@ -25,6 +27,16 @@ type stopwatchModel struct {
 	start   time.Time
 	end     time.Time
 	elapsed time.Duration
+
+	keys KeyMap
+	help help.Model
+}
+
+func NewStopwatchModel() *stopwatchModel {
+	return &stopwatchModel{
+		keys: DefaultKeyMap,
+		help: help.New(),
+	}
 }
 
 // INIT, UPDATE, VIEW
@@ -37,14 +49,21 @@ func (m *stopwatchModel) Init() tea.Cmd {
 func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 
+	case tea.WindowSizeMsg:
+		// If we set a width on the help menu it can gracefully truncate
+		// its view as needed.
+		m.help.Width = msg.Width
+
 	case msgStart:
 		m.start = msg.t
 		m.running = true
+		m.keys.Space.SetHelp("<spacebar>", "Stop")
 		return m, nil
 
 	case msgStop:
 		m.end = time.Now()
 		m.running = false
+		m.keys.Space.SetHelp("<spacebar>", "Start")
 		return m, nil
 
 	case msgTick:
@@ -54,18 +73,20 @@ func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		return m, tick()
 
 	case tea.KeyMsg:
-		switch msg.String() {
+		switch {
 
-		case "q", "esc", "ctrl+c":
+		case key.Matches(msg, DefaultKeyMap.Quit):
 			return m, tea.Quit
 
-		case " ":
+		case key.Matches(msg, DefaultKeyMap.Space):
 			if m.running {
 				return m, m.Stop
 			} else {
 				return m, m.Start
 			}
+
 		}
+
 	}
 
 	return m, nil
@@ -78,13 +99,7 @@ func (m *stopwatchModel) View() string {
 
 	s += "\n\n"
 
-	if m.running {
-		s += "Press <space> to stop"
-	} else {
-		s += "Press <space> to start"
-	}
-
-	s += "| Press <q> to quit"
+	s += m.help.View(m.keys)
 
 	return s
 }
@@ -94,7 +109,7 @@ func (m *stopwatchModel) View() string {
 // -------
 
 func ShowStopwatch() {
-	p := tea.NewProgram(&stopwatchModel{})
+	p := tea.NewProgram(NewStopwatchModel())
 	if _, err := p.Run(); err != nil {
 		panic(err)
 	}
@@ -117,4 +132,30 @@ func (m *stopwatchModel) Start() tea.Msg {
 // A command to stop the stopwatch
 func (m *stopwatchModel) Stop() tea.Msg {
 	return msgStop{}
+}
+
+// KEYBINDINGS
+// -----------
+
+// KeyMap is a collection of key bindings
+type KeyMap struct {
+	Space key.Binding
+	Quit  key.Binding
+}
+
+var DefaultKeyMap = KeyMap{
+	Space: key.NewBinding(key.WithKeys("s", " "), key.WithHelp("<space>", "Start")),
+	Quit:  key.NewBinding(key.WithKeys("q", "esc", "ctrl+c"), key.WithHelp("q", "Quit")),
+}
+
+// ShortHelp returns a slice of key bindings that are used in the short help
+func (k KeyMap) ShortHelp() []key.Binding {
+	return []key.Binding{k.Space, k.Quit}
+}
+
+// FullHelp returns a slice of key bindings that are used in the full help
+func (k KeyMap) FullHelp() [][]key.Binding {
+	return [][]key.Binding{
+		{k.Space, k.Quit},
+	}
 }

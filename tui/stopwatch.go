@@ -6,6 +6,7 @@ import (
 	"github.com/charmbracelet/bubbles/help"
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss"
 )
 
 // CONSTANTS
@@ -105,13 +106,14 @@ func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	return m, nil
 }
 
+var styles = lipgloss.NewStyle()
+
 // The View function is responsible for rendering the UI.
 func (m *stopwatchModel) View() string {
 	s := "\n"
 
-	s += m.elapsed.Truncate(TICK_SPEED).String()
-
-	s += "\n\n"
+	time := m.elapsed.Truncate(TICK_SPEED).String()
+	s += styles.Render(time) + "\n\n"
 
 	s += m.help.View(m.keys)
 

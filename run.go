@@ -4,6 +4,8 @@ import (
 	"io"
 	"os"
 	"time"
+
+	"github.com/Shresht7/go-time/cmd"
 )
 
 // ---
@@ -16,13 +18,19 @@ func run(args []string, stdout io.Writer) error {
 
 	//	If no command was passed, then show time and exit
 	if len(os.Args) < 2 {
-		showTime(now)
+		cmd.ShowTime(now)
 		os.Exit(0)
 	}
 
 	//	Execute the given command
 	command := os.Args[1]
 	switch command {
+
+	case "now":
+		cmd.ShowTime(now)
+
+	case "time":
+		cmd.ShowTime(now)
 
 	case "clock":
 		showClock(now)
@@ -33,14 +41,8 @@ func run(args []string, stdout io.Writer) error {
 	case "calendar":
 		showCalendar(now)
 
-	case "now":
-		showTime(now)
-
-	case "time":
-		showTime(now)
-
 	default:
-		showTime(now)
+		cmd.ShowTime(now)
 
 	}
 

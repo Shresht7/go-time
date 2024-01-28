@@ -13,9 +13,18 @@ import (
 // MODEL
 // -----
 
+type lap struct {
+	start time.Time
+	end   time.Time
+}
+
+func (l lap) duration() time.Duration {
+	return l.end.Sub(l.start)
+}
+
 // Represents a list of lap times
 type Model struct {
-	laps []time.Duration // The collection of lap times
+	laps []lap // The collection of lap times
 }
 
 // Creates a new lap times model
@@ -24,13 +33,13 @@ func New() Model {
 }
 
 // Adds a lap time to the list
-func (m *Model) Add(d time.Duration) {
-	m.laps = append(m.laps, d)
+func (m *Model) Add(start, end time.Time) {
+	m.laps = append(m.laps, lap{start, end})
 }
 
 // Clears the list of lap times
 func (m *Model) Reset() {
-	m.laps = []time.Duration{}
+	m.laps = []lap{}
 }
 
 // Returns the number of lap times in the list
@@ -38,10 +47,17 @@ func (m Model) Len() int {
 	return len(m.laps)
 }
 
+func (m Model) LastOr(fallback time.Time) time.Time {
+	if m.Len() == 0 {
+		return fallback
+	}
+	return m.laps[m.Len()-1].end
+}
+
 func (m Model) Shortest() int {
 	shortest := 0
 	for i, lap := range m.laps {
-		if lap < m.laps[shortest] {
+		if lap.duration() < m.laps[shortest].duration() {
 			shortest = i
 		}
 	}
@@ -51,11 +67,19 @@ func (m Model) Shortest() int {
 func (m Model) Longest() int {
 	longest := 0
 	for i, lap := range m.laps {
-		if lap > m.laps[longest] {
+		if lap.duration() > m.laps[longest].duration() {
 			longest = i
 		}
 	}
 	return longest
+}
+
+func (m Model) sum(i int) time.Duration {
+	var total time.Duration
+	for _, lap := range m.laps[:i+1] {
+		total += lap.duration()
+	}
+	return total
 }
 
 // INIT
@@ -78,7 +102,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 func (m Model) View() string {
 	s := ""
 	for i, lap := range m.laps {
-		s += fmt.Sprintf("%s\t%s\n", m.styleIndex(i), helpers.FormatDuration(lap))
+		s += fmt.Sprintf("%s\t%s\t\t%s\n", m.styleIndex(i), helpers.FormatDuration(lap.duration()), helpers.FormatDuration(m.sum(i)))
 	}
 	return s
 }
@@ -90,10 +114,10 @@ func (m Model) styleIndex(i int) string {
 	s := fmt.Sprintf("%d", i+1)
 
 	if i == m.Shortest() {
-		return colorRed.Render(s)
+		return colorBlue.Render(s)
 	}
 	if i == m.Longest() {
-		return colorBlue.Render(s)
+		return colorRed.Render(s)
 	}
 	return s
 }

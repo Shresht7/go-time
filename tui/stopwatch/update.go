@@ -37,7 +37,9 @@ func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	// Stopwatch Lap
 	case msgLap:
-		m.laps.Add(m.elapsed)
+		start := m.laps.LastOr(m.start)
+		end := time.Now()
+		m.laps.Add(start, end)
 		return m, nil
 
 	// Stopwatch Reset

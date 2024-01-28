@@ -13,7 +13,7 @@ import (
 func (m Model) View() string {
 	s := ""
 	for i, lap := range m.laps {
-		s += fmt.Sprintf("%s\t%s\t\t%s\n", m.styleIndex(i), helpers.FormatDuration(lap.duration()), helpers.FormatDuration(m.sum(i)))
+		s += fmt.Sprintf("%s\t%s\t\t%s\n", m.styleIndex(i), helpers.FormatDuration(lap.duration()), helpers.FormatDuration(m.Sum(i)))
 	}
 	return s
 }

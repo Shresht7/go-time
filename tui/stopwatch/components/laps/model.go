@@ -61,7 +61,7 @@ func (m Model) Longest() int {
 }
 
 // Returns the total time of all lap times in the list
-func (m Model) sum(i int) time.Duration {
+func (m Model) Sum(i int) time.Duration {
 	var total time.Duration
 	for _, lap := range m.laps[:i+1] {
 		total += lap.duration()

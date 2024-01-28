@@ -13,14 +13,22 @@ import (
 func (m Model) View() string {
 	s := ""
 	for i, lap := range m.laps {
-		s += fmt.Sprintf("%s\t%s\t\t%s\n", m.styleIndex(i), helpers.FormatDuration(lap.duration()), helpers.FormatDuration(m.Sum(i)))
+		s += fmt.Sprintf("%s\t%s\t\t%s\n",
+			m.styleIndex(i),
+			helpers.FormatDuration(lap.duration()),
+			helpers.FormatDuration(m.Sum(i)),
+		)
 	}
 	return s
 }
 
-var colorRed = lipgloss.NewStyle().Foreground(lipgloss.Color("9"))
-var colorBlue = lipgloss.NewStyle().Foreground(lipgloss.Color("12"))
+// STYLES
+var (
+	colorRed  = lipgloss.NewStyle().Foreground(lipgloss.Color("9"))
+	colorBlue = lipgloss.NewStyle().Foreground(lipgloss.Color("12"))
+)
 
+// Color the shortest and longest lap times in red and blue, respectively.
 func (m Model) styleIndex(i int) string {
 	s := fmt.Sprintf("%d", i+1)
 

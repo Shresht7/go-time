@@ -45,11 +45,11 @@ func NewStopwatchModel() *stopwatchModel {
 }
 
 // Returns the elapsed time as a string in the format "HH:MM:SS:MS"
-func (m *stopwatchModel) Elapsed() string {
-	hours := int(m.elapsed.Hours()) % 24
-	minutes := int(m.elapsed.Minutes()) % 60
-	seconds := int(m.elapsed.Seconds()) % 60
-	millisecond := int(m.elapsed.Milliseconds() % 1000)
+func formatElapsed(elapsed time.Duration) string {
+	hours := int(elapsed.Hours()) % 24
+	minutes := int(elapsed.Minutes()) % 60
+	seconds := int(elapsed.Seconds()) % 60
+	millisecond := int(elapsed.Milliseconds() % 1000)
 	return fmt.Sprintf("%02dh : %02dm : %02ds : %03dms", hours, minutes, seconds, millisecond)
 }
 
@@ -139,7 +139,8 @@ var styles = lipgloss.NewStyle().Padding(1, 0)
 // The View function is responsible for rendering the UI.
 func (m *stopwatchModel) View() string {
 	s := lipgloss.JoinVertical(lipgloss.Top,
-		styles.Render(m.Elapsed()),
+		styles.Render(formatElapsed(m.elapsed)),
+		"\n",
 		m.help.View(m.keys),
 	)
 	return s

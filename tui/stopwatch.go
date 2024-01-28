@@ -26,10 +26,11 @@ func tick() tea.Cmd {
 
 // Represents a stopwatch
 type stopwatchModel struct {
-	running bool          // Whether the stopwatch is running
-	start   time.Time     // The time the stopwatch was started
-	end     time.Time     // The time the stopwatch was stopped
-	elapsed time.Duration // The elapsed time
+	running bool            // Whether the stopwatch is running
+	start   time.Time       // The time the stopwatch was started
+	end     time.Time       // The time the stopwatch was stopped
+	elapsed time.Duration   // The elapsed time
+	laps    []time.Duration // The lap times
 
 	keys KeyMap     // Key bindings for the stopwatch view
 	help help.Model // Help menu model
@@ -93,6 +94,11 @@ func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.keys.Space.SetHelp("<spacebar>", "stop")
 		return m, nil
 
+	// Stopwatch Lap
+	case msgLap:
+		m.laps = append(m.laps, m.elapsed)
+		return m, nil
+
 	// Stopwatch Reset
 	case msgReset:
 		m.elapsed = 0
@@ -127,6 +133,10 @@ func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case key.Matches(msg, DefaultKeyMap.R):
 			return m, m.Reset
 
+		// Enter
+		case key.Matches(msg, DefaultKeyMap.Enter):
+			return m, m.Lap
+
 		}
 
 	}
@@ -138,12 +148,32 @@ var styles = lipgloss.NewStyle().Padding(1, 0)
 
 // The View function is responsible for rendering the UI.
 func (m *stopwatchModel) View() string {
-	s := lipgloss.JoinVertical(lipgloss.Top,
+
+	laps := ""
+	if len(m.laps) > 0 {
+		laps = "Laps\tLap Time\n"
+		for i, lap := range m.laps {
+			laps += fmt.Sprintf("%d\t%s\n", i+1, formatElapsed(lap))
+		}
+	}
+
+	s := lipgloss.JoinVertical(lipgloss.Top, Filter(
 		styles.Render(formatElapsed(m.elapsed)),
-		"\n",
+		laps,
 		m.help.View(m.keys),
-	)
+	)...)
+
 	return s
+}
+
+func Filter(s ...string) []string {
+	var filtered []string
+	for _, v := range s {
+		if v != "" {
+			filtered = append(filtered, v)
+		}
+	}
+	return filtered
 }
 
 // -------
@@ -170,6 +200,8 @@ type msgStop struct{}
 // A message to resume the stopwatch
 type msgResume struct{}
 
+type msgLap struct{}
+
 // A message to reset the stopwatch
 type msgReset struct{}
 
@@ -193,6 +225,10 @@ func (m *stopwatchModel) Reset() tea.Msg {
 	return msgReset{}
 }
 
+func (m *stopwatchModel) Lap() tea.Msg {
+	return msgLap{}
+}
+
 // KEYBINDINGS
 // -----------
 
@@ -200,23 +236,25 @@ func (m *stopwatchModel) Reset() tea.Msg {
 type KeyMap struct {
 	R     key.Binding
 	Space key.Binding
+	Enter key.Binding
 	Quit  key.Binding
 }
 
 var DefaultKeyMap = KeyMap{
 	Space: key.NewBinding(key.WithKeys("s", " "), key.WithHelp("<spacebar>", "start")),
+	Enter: key.NewBinding(key.WithKeys("enter"), key.WithHelp("<enter>", "lap")),
 	R:     key.NewBinding(key.WithKeys("r"), key.WithHelp("r", "reset")),
 	Quit:  key.NewBinding(key.WithKeys("q", "esc", "ctrl+c"), key.WithHelp("q", "quit")),
 }
 
 // ShortHelp returns a slice of key bindings that are used in the short help
 func (k KeyMap) ShortHelp() []key.Binding {
-	return []key.Binding{k.Quit, k.R, k.Space}
+	return []key.Binding{k.Quit, k.R, k.Enter, k.Space}
 }
 
 // FullHelp returns a slice of key bindings that are used in the full help
 func (k KeyMap) FullHelp() [][]key.Binding {
 	return [][]key.Binding{
-		{k.Quit, k.R, k.Space},
+		{k.Quit, k.R, k.Enter, k.Space},
 	}
 }

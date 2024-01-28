@@ -7,6 +7,7 @@ import (
 
 	"github.com/Shresht7/go-time/cmd"
 	"github.com/Shresht7/go-time/tui"
+	"github.com/Shresht7/go-time/tui/stopwatch"
 )
 
 // ---
@@ -41,6 +42,9 @@ func run(args []string, stdout io.Writer) error {
 
 	case "calendar":
 		cmd.ShowCalendar(now)
+
+	case "stopwatch":
+		stopwatch.Run()
 
 	default:
 		cmd.ShowTime(now)

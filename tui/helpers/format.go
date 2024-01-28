@@ -5,8 +5,8 @@ import (
 	"time"
 )
 
-// Returns the elapsed time as a string in the format "HH:MM:SS:MS"
-func FormatElapsed(elapsed time.Duration) string {
+// Returns the elapsed time duration as a string in the format "HH:MM:SS:MS"
+func FormatDuration(elapsed time.Duration) string {
 	hours := int(elapsed.Hours()) % 24
 	minutes := int(elapsed.Minutes()) % 60
 	seconds := int(elapsed.Seconds()) % 60

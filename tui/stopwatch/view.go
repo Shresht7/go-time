@@ -20,12 +20,12 @@ func (m *stopwatchModel) View() string {
 	if len(m.laps) > 0 {
 		laps = "Laps\tLap Time\n"
 		for i, lap := range m.laps {
-			laps += fmt.Sprintf("%d\t%s\n", i+1, helpers.FormatElapsed(lap))
+			laps += fmt.Sprintf("%d\t%s\n", i+1, helpers.FormatDuration(lap))
 		}
 	}
 
 	s := lipgloss.JoinVertical(lipgloss.Top, Filter(
-		styles.Render(helpers.FormatElapsed(m.elapsed)),
+		styles.Render(helpers.FormatDuration(m.elapsed)),
 		laps,
 		m.help.View(m.keys),
 	)...)

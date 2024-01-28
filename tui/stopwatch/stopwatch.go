@@ -7,22 +7,6 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-// MODEL
-// -----
-
-// INIT, UPDATE, VIEW
-// ------------------
-
-func Filter(s ...string) []string {
-	var filtered []string
-	for _, v := range s {
-		if v != "" {
-			filtered = append(filtered, v)
-		}
-	}
-	return filtered
-}
-
 // -------
 // COMMAND
 // -------

@@ -24,7 +24,7 @@ func (m *stopwatchModel) View() string {
 		}
 	}
 
-	s := lipgloss.JoinVertical(lipgloss.Top, Filter(
+	s := lipgloss.JoinVertical(lipgloss.Top, helpers.Filter(
 		styles.Render(helpers.FormatDuration(m.elapsed)),
 		laps,
 		m.help.View(m.keys),

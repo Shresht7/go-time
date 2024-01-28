@@ -27,6 +27,11 @@ func (m *Model) Add(d time.Duration) {
 	m.laps = append(m.laps, d)
 }
 
+// Clears the list of lap times
+func (m *Model) Reset() {
+	m.laps = []time.Duration{}
+}
+
 // Returns the number of lap times in the list
 func (m Model) Len() int {
 	return len(m.laps)

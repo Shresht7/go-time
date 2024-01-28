@@ -44,6 +44,7 @@ func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case msgReset:
 		m.elapsed = 0
 		m.running = false
+		m.laps.Reset()
 		m.keys.Space.SetHelp("<spacebar>", "start")
 		return m, nil
 

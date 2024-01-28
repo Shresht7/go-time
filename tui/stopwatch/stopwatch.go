@@ -1,4 +1,4 @@
-package tui
+package stopwatch
 
 import (
 	"fmt"
@@ -8,6 +8,8 @@ import (
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
+
+	"github.com/Shresht7/go-time/tui/helpers"
 )
 
 // CONSTANTS
@@ -18,7 +20,7 @@ const TICK_SPEED = 10 * time.Millisecond
 
 // A tea.Cmd to update the clock every interval
 func tick() tea.Cmd {
-	return ticker(TICK_SPEED)
+	return helpers.CmdTicker(TICK_SPEED)
 }
 
 // MODEL
@@ -107,7 +109,7 @@ func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		return m, nil
 
 	// Stopwatch Tick
-	case msgTick:
+	case helpers.MsgTick:
 		if m.running {
 			m.elapsed = time.Since(m.start)
 		}
@@ -181,7 +183,7 @@ func Filter(s ...string) []string {
 // -------
 
 // A command to start the stopwatch
-func ShowStopwatch() {
+func Run() {
 	p := tea.NewProgram(NewStopwatchModel())
 	if _, err := p.Run(); err != nil {
 		panic(err)

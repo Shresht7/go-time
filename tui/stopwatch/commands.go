@@ -12,10 +12,11 @@ import (
 // A message to start the stopwatch
 type msgStart struct{ t time.Time }
 
+// A message to record a lap time
+type msgLap struct{}
+
 // A message to stop the stopwatch
 type msgStop struct{}
-
-type msgLap struct{}
 
 // A message to reset the stopwatch
 type msgReset struct{}
@@ -28,6 +29,11 @@ func (m *stopwatchModel) cmdStart() tea.Msg {
 	return msgStart{time.Now()}
 }
 
+// A command to record a lap time
+func (m *stopwatchModel) cmdLap() tea.Msg {
+	return msgLap{}
+}
+
 // A command to stop the stopwatch
 func (m *stopwatchModel) cmdStop() tea.Msg {
 	return msgStop{}
@@ -36,8 +42,4 @@ func (m *stopwatchModel) cmdStop() tea.Msg {
 // A command to reset the stopwatch
 func (m *stopwatchModel) cmdReset() tea.Msg {
 	return msgReset{}
-}
-
-func (m *stopwatchModel) cmdLap() tea.Msg {
-	return msgLap{}
 }

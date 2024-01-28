@@ -134,17 +134,14 @@ func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	return m, nil
 }
 
-var styles = lipgloss.NewStyle()
+var styles = lipgloss.NewStyle().Padding(1, 0)
 
 // The View function is responsible for rendering the UI.
 func (m *stopwatchModel) View() string {
-	s := "\n"
-
-	time := m.Elapsed()
-	s += styles.Render(time) + "\n\n"
-
-	s += m.help.View(m.keys)
-
+	s := lipgloss.JoinVertical(lipgloss.Top,
+		styles.Render(m.Elapsed()),
+		m.help.View(m.keys),
+	)
 	return s
 }
 

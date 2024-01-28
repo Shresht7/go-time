@@ -7,6 +7,13 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
+// STYLES
+var (
+	header    = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("8")).Border(lipgloss.NormalBorder(), false, false, true, false)
+	colorRed  = lipgloss.NewStyle().Foreground(lipgloss.Color("9"))
+	colorBlue = lipgloss.NewStyle().Foreground(lipgloss.Color("12"))
+)
+
 // VIEW
 // ----
 
@@ -19,7 +26,7 @@ func (m Model) View() string {
 	}
 
 	// Print the laps table
-	s += "Lap\tLap Time\tTotal Time\n"
+	s += header.Render("Lap\tLap Time\t\tTotal Time") + "\n"
 	for i, lap := range m.laps {
 		s += fmt.Sprintf("%s\t%s\t%s\n",
 			m.styleIndex(i),
@@ -30,12 +37,6 @@ func (m Model) View() string {
 
 	return s
 }
-
-// STYLES
-var (
-	colorRed  = lipgloss.NewStyle().Foreground(lipgloss.Color("9"))
-	colorBlue = lipgloss.NewStyle().Foreground(lipgloss.Color("12"))
-)
 
 // Color the shortest and longest lap times in red and blue, respectively.
 func (m Model) styleIndex(i int) string {

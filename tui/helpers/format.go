@@ -2,14 +2,27 @@ package helpers
 
 import (
 	"fmt"
+	"strings"
 	"time"
 )
 
 // Returns the elapsed time duration as a string in the format "HH:MM:SS:MS"
 func FormatDuration(elapsed time.Duration) string {
-	hours := int(elapsed.Hours()) % 24
+	s := []string{}
+
+	hours := int(elapsed.Hours())
+	if hours > 0 {
+		s = append(s, fmt.Sprintf("%02d", hours))
+	}
+
 	minutes := int(elapsed.Minutes()) % 60
+	s = append(s, fmt.Sprintf("%02d", minutes))
+
 	seconds := int(elapsed.Seconds()) % 60
-	millisecond := int(elapsed.Milliseconds() % 1000)
-	return fmt.Sprintf("%02dh : %02dm : %02ds : %03dms", hours, minutes, seconds, millisecond)
+	s = append(s, fmt.Sprintf("%02d", seconds))
+
+	microseconds := int(elapsed.Microseconds() % 100)
+	s = append(s, fmt.Sprintf("%02d", microseconds))
+
+	return strings.Join(s, ":")
 }

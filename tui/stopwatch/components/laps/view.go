@@ -12,13 +12,22 @@ import (
 
 func (m Model) View() string {
 	s := ""
+
+	// If there are no laps, return an empty string
+	if len(m.laps) == 0 {
+		return s
+	}
+
+	// Print the laps table
+	s += "Lap\tLap Time\tTotal Time\n"
 	for i, lap := range m.laps {
-		s += fmt.Sprintf("%s\t%s\t\t%s\n",
+		s += fmt.Sprintf("%s\t%s\t%s\n",
 			m.styleIndex(i),
 			helpers.FormatDuration(lap.duration()),
 			helpers.FormatDuration(m.Sum(i)),
 		)
 	}
+
 	return s
 }
 

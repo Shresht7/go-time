@@ -23,7 +23,7 @@ func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	// Stopwatch Start
 	case msgStart:
-		m.start = msg.t
+		m.start = time.Now().Add(-m.elapsed)
 		m.running = true
 		m.keys.Space.SetHelp("<spacebar>", "stop")
 		return m, nil
@@ -33,13 +33,6 @@ func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.end = time.Now()
 		m.running = false
 		m.keys.Space.SetHelp("<spacebar>", "start")
-		return m, nil
-
-	// Stopwatch Resume
-	case msgResume:
-		m.start = time.Now().Add(-m.elapsed)
-		m.running = true
-		m.keys.Space.SetHelp("<spacebar>", "stop")
 		return m, nil
 
 	// Stopwatch Lap
@@ -72,18 +65,18 @@ func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		// Space
 		case key.Matches(msg, DefaultKeyMap.Space):
 			if m.running {
-				return m, m.Stop
+				return m, m.cmdStop
 			} else {
-				return m, m.Resume
+				return m, m.cmdStart
 			}
 
 		// R
 		case key.Matches(msg, DefaultKeyMap.R):
-			return m, m.Reset
+			return m, m.cmdReset
 
 		// Enter
 		case key.Matches(msg, DefaultKeyMap.Enter):
-			return m, m.Lap
+			return m, m.cmdLap
 
 		}
 

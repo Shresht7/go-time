@@ -1,7 +1,6 @@
 package stopwatch
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/charmbracelet/bubbles/key"
@@ -10,15 +9,6 @@ import (
 
 // MODEL
 // -----
-
-// Returns the elapsed time as a string in the format "HH:MM:SS:MS"
-func formatElapsed(elapsed time.Duration) string {
-	hours := int(elapsed.Hours()) % 24
-	minutes := int(elapsed.Minutes()) % 60
-	seconds := int(elapsed.Seconds()) % 60
-	millisecond := int(elapsed.Milliseconds() % 1000)
-	return fmt.Sprintf("%02dh : %02dm : %02ds : %03dms", hours, minutes, seconds, millisecond)
-}
 
 // INIT, UPDATE, VIEW
 // ------------------

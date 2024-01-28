@@ -4,6 +4,8 @@ import (
 	"fmt"
 
 	"github.com/charmbracelet/lipgloss"
+
+	"github.com/Shresht7/go-time/tui/helpers"
 )
 
 // VIEW
@@ -18,12 +20,12 @@ func (m *stopwatchModel) View() string {
 	if len(m.laps) > 0 {
 		laps = "Laps\tLap Time\n"
 		for i, lap := range m.laps {
-			laps += fmt.Sprintf("%d\t%s\n", i+1, formatElapsed(lap))
+			laps += fmt.Sprintf("%d\t%s\n", i+1, helpers.FormatElapsed(lap))
 		}
 	}
 
 	s := lipgloss.JoinVertical(lipgloss.Top, Filter(
-		styles.Render(formatElapsed(m.elapsed)),
+		styles.Render(helpers.FormatElapsed(m.elapsed)),
 		laps,
 		m.help.View(m.keys),
 	)...)

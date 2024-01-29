@@ -5,6 +5,7 @@ import tea "github.com/charmbracelet/bubbletea"
 // INIT
 // ----
 
-func (c clockModel) Init() tea.Cmd {
+// The Init function is called when the program starts. It starts the clock ticker
+func (c model) Init() tea.Cmd {
 	return tick()
 }

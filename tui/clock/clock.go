@@ -6,6 +6,7 @@ import tea "github.com/charmbracelet/bubbletea"
 // RUN
 // ---
 
+// Run starts the clock bubble-tea program
 func Run() {
 	clock := newClockModel()
 	p := tea.NewProgram(clock)

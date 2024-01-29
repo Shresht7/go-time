@@ -10,7 +10,7 @@ import (
 // ------
 
 // The Update function is called when events happen, like keypresses
-func (c *clockModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+func (c *model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case helpers.MsgTick:
 		c.t = msg.T

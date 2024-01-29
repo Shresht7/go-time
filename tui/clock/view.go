@@ -4,7 +4,7 @@ package clock
 // ----
 
 // The View function is called every time the model is updated
-func (c *clockModel) View() string {
+func (c *model) View() string {
 	s := "\n" // start with a newline for padding
 
 	s += c.Icon() // add the icon for the current time of day

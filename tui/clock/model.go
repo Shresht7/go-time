@@ -10,19 +10,19 @@ import (
 // -----
 
 // Represents the state of the clock
-type clockModel struct {
+type model struct {
 	t time.Time
 }
 
-// Returns a new clockModel
-func newClockModel() *clockModel {
-	return &clockModel{
+// Instantiates a clock model
+func newClockModel() *model {
+	return &model{
 		t: time.Now(),
 	}
 }
 
 // Returns the current time in the format "HH:MM:SS"
-func (c *clockModel) formatTime() (hours, minutes, seconds string) {
+func (c *model) formatTime() (hours, minutes, seconds string) {
 	h := c.t.Hour()
 	m := c.t.Minute()
 	s := c.t.Second()
@@ -30,7 +30,7 @@ func (c *clockModel) formatTime() (hours, minutes, seconds string) {
 }
 
 // Returns the icon for the clock based on the current time of day
-func (c *clockModel) Icon() string {
+func (c *model) Icon() string {
 	hour := c.t.Hour()
 	switch {
 	case hour >= 6 && hour < 12:

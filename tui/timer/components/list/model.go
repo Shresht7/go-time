@@ -9,6 +9,7 @@ import "github.com/charmbracelet/bubbles/help"
 type Model struct {
 	items    []string // items in the list
 	selected int      // index of the selected item
+	prompt   string   // prompt to display above the list
 
 	isFocused bool // whether the list is focused
 

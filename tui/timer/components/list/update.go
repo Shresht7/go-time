@@ -8,7 +8,6 @@ import (
 // UPDATE
 // ------
 
-// Updates the list component.
 func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 	switch msg := msg.(type) {
 

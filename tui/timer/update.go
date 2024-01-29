@@ -31,16 +31,6 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.SetFocus(focusTimer)
 			}
 
-		// Keypress: Spacebar
-		case key.Matches(msg, m.keys.Space):
-			if !m.timer.Running {
-				m.timer.Start()
-				m.keys.Space.SetHelp("<spacebar>", "pause")
-			} else {
-				m.timer.Stop()
-				m.keys.Space.SetHelp("<spacebar>", "resume")
-			}
-
 		// Keypress: Quit
 		case key.Matches(msg, m.keys.Quit):
 			return m, tea.Quit

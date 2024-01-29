@@ -30,6 +30,7 @@ func (m Model) viewHelp() string {
 
 	switch m.focused {
 	case focusTimer:
+		help = m.timer.ViewHelp()
 	case focusList:
 		help = m.list.ViewHelp()
 	}

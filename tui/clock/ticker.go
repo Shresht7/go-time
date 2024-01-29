@@ -7,8 +7,8 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-// CONSTANTS
-// ---------
+// TICKER
+// ------
 
 // The speed at which the clock ticks
 const TICK_SPEED = 1 * time.Second

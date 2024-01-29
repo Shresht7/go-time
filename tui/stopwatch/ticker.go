@@ -8,8 +8,8 @@ import (
 	"github.com/Shresht7/go-time/tui/helpers"
 )
 
-// CONSTANTS
-// ---------
+// TICKER
+// ------
 
 // The speed at which the stopwatch ticks
 const TICK_SPEED = 10 * time.Millisecond

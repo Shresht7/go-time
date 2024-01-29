@@ -13,7 +13,7 @@ type timerModel struct {
 	help help.Model // Help menu model
 }
 
-func newTimerModel() timerModel {
+func NewTimerModel() timerModel {
 	return timerModel{
 		remaining: 72,
 		keys:      DefaultKeyMap,

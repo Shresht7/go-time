@@ -19,10 +19,11 @@ type Model struct {
 // Instantiates a new list model
 func New(items ...string) Model {
 	return Model{
-		items:    items,
-		selected: 0,
-		keys:     DefaultKeyModel,
-		help:     help.New(),
+		items:     items,
+		selected:  0,
+		isFocused: false,
+		keys:      DefaultKeyModel,
+		help:      help.New(),
 	}
 }
 

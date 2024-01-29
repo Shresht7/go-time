@@ -10,6 +10,8 @@ type Model struct {
 	items    []string // items in the list
 	selected int      // index of the selected item
 
+	isFocused bool // whether the list is focused
+
 	keys KeyModel   // keybindings model
 	help help.Model // help model
 }
@@ -61,4 +63,9 @@ func (m *Model) Next() {
 // Returns the help menu for the list component
 func (m *Model) ViewHelp() string {
 	return m.help.View(m.keys)
+}
+
+// Set the focused state of the list
+func (m *Model) SetFocused(f bool) {
+	m.isFocused = f
 }

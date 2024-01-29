@@ -41,7 +41,7 @@ type Model struct {
 }
 
 func New() Model {
-	return Model{
+	m := Model{
 		timer: timer.New(),
 		list: list.New(
 			"5 seconds",
@@ -50,6 +50,20 @@ func New() Model {
 		),
 		keys: DefaultKeyMap,
 		help: help.New(),
+	}
+	m.SetFocus(focusTimer)
+	return m
+}
+
+func (m *Model) SetFocus(f focused) {
+	m.focused = f
+	switch f {
+	case focusTimer:
+		m.timer.SetFocused(true)
+		m.list.SetFocused(false)
+	case focusList:
+		m.timer.SetFocused(false)
+		m.list.SetFocused(true)
 	}
 }
 
@@ -81,9 +95,9 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case key.Matches(msg, m.keys.Tab):
 			switch m.focused {
 			case focusTimer:
-				m.focused = focusList
+				m.SetFocus(focusList)
 			case focusList:
-				m.focused = focusTimer
+				m.SetFocus(focusTimer)
 			}
 
 		// Keypress: Spacebar

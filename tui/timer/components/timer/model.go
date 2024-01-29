@@ -31,6 +31,10 @@ func (m *Model) Stop() {
 	m.Running = false
 }
 
+func (m *Model) Reset() {
+	m.remaining = 72
+}
+
 // Set the focus state of the timer
 func (m *Model) SetFocused(f bool) {
 	m.isFocused = f

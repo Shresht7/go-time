@@ -1,6 +1,7 @@
 package timer
 
 import (
+	"github.com/Shresht7/go-time/tui/timer/components/list"
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -17,6 +18,11 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		// If we set a width on the help menu it can gracefully truncate
 		// its view as needed.
 		m.help.Width = msg.Width
+
+	// Preset Selection Event
+	case list.MsgSelect:
+		m.timer.Reset()
+		m.SetFocus(focusTimer)
 
 	// Key Press Event
 	case tea.KeyMsg:

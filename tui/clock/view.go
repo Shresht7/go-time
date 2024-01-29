@@ -10,8 +10,7 @@ func (c *model) View() string {
 	s += c.Icon() // add the icon for the current time of day
 
 	// add the time in the format "HH:MM:SS"
-	hours, minutes, seconds := c.formatTime()
-	s += "  " + hours + ":" + minutes + ":" + seconds + "\t"
+	s += "  " + c.t.Format("15:04:05") + "\t"
 
 	// add the date in the format "Saturday, 27 January 2024"
 	s += c.t.Format("Monday, 2 January 2006")

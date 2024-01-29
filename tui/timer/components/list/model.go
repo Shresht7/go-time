@@ -28,24 +28,9 @@ func New(items ...string) Model {
 	}
 }
 
-// Returns the list of items
-func (m *Model) Items() []string {
-	return m.items
-}
-
-// Returns the index of the selected item
-func (m *Model) Selected() int {
-	return m.selected
-}
-
-// Returns the selected item
-func (m *Model) SelectedItem() string {
-	return m.items[m.selected]
-}
-
-// Returns the length of the list
-func (m *Model) Len() int {
-	return len(m.items)
+// Set the prompt
+func (m *Model) SetPrompt(p string) {
+	m.prompt = p
 }
 
 // Move the selection to the previous item
@@ -62,16 +47,12 @@ func (m *Model) Next() {
 	}
 }
 
-// Returns the help menu for the list component
-func (m *Model) ViewHelp() string {
-	return m.help.View(m.keys)
-}
-
 // Set the focused state of the list
 func (m *Model) SetFocused(f bool) {
 	m.isFocused = f
 }
 
-func (m *Model) SetPrompt(p string) {
-	m.prompt = p
+// Returns the help menu for the list component
+func (m *Model) ViewHelp() string {
+	return m.help.View(m.keys)
 }

@@ -10,7 +10,7 @@ import (
 // ---
 
 func Run() {
-	timer := timer.NewTimerModel()
+	timer := timer.New()
 	p := tea.NewProgram(timer)
 	if _, err := p.Run(); err != nil {
 		panic(err)

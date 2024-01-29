@@ -5,7 +5,7 @@ import "strconv"
 // VIEW
 // ----
 
-func (m timerModel) View() string {
+func (m Model) View() string {
 	s := ""
 	s += strconv.Itoa(m.remaining) + "\n"
 	s += m.help.View(m.keys)

@@ -5,7 +5,7 @@ import "github.com/charmbracelet/bubbles/help"
 // MODEL
 // -----
 
-type timerModel struct {
+type Model struct {
 	running   bool // Whether the timer is running
 	remaining int  // Remaining time in seconds
 
@@ -13,18 +13,18 @@ type timerModel struct {
 	help help.Model // Help menu model
 }
 
-func NewTimerModel() timerModel {
-	return timerModel{
+func New() Model {
+	return Model{
 		remaining: 72,
 		keys:      DefaultKeyMap,
 		help:      help.New(),
 	}
 }
 
-func (m *timerModel) Start() {
+func (m *Model) Start() {
 	m.running = true
 }
 
-func (m *timerModel) Stop() {
+func (m *Model) Stop() {
 	m.running = false
 }

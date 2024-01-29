@@ -7,6 +7,6 @@ import (
 // INIT
 // ----
 
-func (m timerModel) Init() tea.Cmd {
+func (m Model) Init() tea.Cmd {
 	return tick()
 }

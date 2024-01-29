@@ -1,11 +1,10 @@
 package timer
 
+import "strconv"
+
 // VIEW
 // ----
 
 func (m timerModel) View() string {
-	if m.running {
-		return "Timer Running"
-	}
-	return "Timer Stopped"
+	return strconv.Itoa(m.remaining)
 }

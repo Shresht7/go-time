@@ -5,6 +5,7 @@ import (
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 
+	"github.com/Shresht7/go-time/tui/timer/components/list"
 	"github.com/Shresht7/go-time/tui/timer/components/timer"
 )
 
@@ -24,6 +25,7 @@ func Run() {
 
 type Model struct {
 	timer timer.Model // The timer component
+	list  list.Model  // The list component
 
 	keys KeyMap     // Key bindings model
 	help help.Model // Help menu model
@@ -32,8 +34,13 @@ type Model struct {
 func New() Model {
 	return Model{
 		timer: timer.New(),
-		keys:  DefaultKeyMap,
-		help:  help.New(),
+		list: list.New(
+			"5 seconds",
+			"10 seconds",
+			"30 seconds",
+		),
+		keys: DefaultKeyMap,
+		help: help.New(),
 	}
 }
 
@@ -82,6 +89,8 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	var cmds []tea.Cmd
 	m.timer, cmd = m.timer.Update(msg)
 	cmds = append(cmds, cmd)
+	m.list, cmd = m.list.Update(msg)
+	cmds = append(cmds, cmd)
 
 	return m, tea.Batch(cmds...)
 }
@@ -91,6 +100,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 func (m Model) View() string {
 	s := m.timer.View()
-	s += "\n" + m.help.View(m.keys)
+	s += "\n" + m.list.View()
+	s += "\n" + m.list.ViewHelp() + " " + m.help.View(m.keys)
 	return s
 }

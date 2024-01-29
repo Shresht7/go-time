@@ -6,8 +6,6 @@ import "strconv"
 // ----
 
 func (m Model) View() string {
-	s := ""
-	s += strconv.Itoa(m.remaining) + "\n"
-	s += m.help.View(m.keys)
+	s := "\n" + strconv.Itoa(m.remaining) + "\n"
 	return s
 }

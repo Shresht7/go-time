@@ -1,6 +1,8 @@
 package timer
 
 import (
+	"github.com/charmbracelet/bubbles/help"
+	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 
 	"github.com/Shresht7/go-time/tui/timer/components/timer"
@@ -22,11 +24,16 @@ func Run() {
 
 type Model struct {
 	timer timer.Model // The timer component
+
+	keys KeyMap     // Key bindings model
+	help help.Model // Help menu model
 }
 
 func New() Model {
 	return Model{
 		timer: timer.New(),
+		keys:  DefaultKeyMap,
+		help:  help.New(),
 	}
 }
 
@@ -41,7 +48,33 @@ func (m Model) Init() tea.Cmd {
 // ------
 
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg.(type) {
+
+	switch msg := msg.(type) {
+
+	// Window Resize Event
+	case tea.WindowSizeMsg:
+		// If we set a width on the help menu it can gracefully truncate
+		// its view as needed.
+		m.help.Width = msg.Width
+
+	// Key Press Event
+	case tea.KeyMsg:
+		switch {
+
+		// Keypress: Spacebar
+		case key.Matches(msg, m.keys.Space):
+			if !m.timer.Running {
+				m.timer.Start()
+				m.keys.Space.SetHelp("<spacebar>", "pause")
+			} else {
+				m.timer.Stop()
+				m.keys.Space.SetHelp("<spacebar>", "resume")
+			}
+
+		// Keypress: Quit
+		case key.Matches(msg, m.keys.Quit):
+			return m, tea.Quit
+		}
 
 	}
 
@@ -57,5 +90,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 // ----
 
 func (m Model) View() string {
-	return m.timer.View()
+	s := m.timer.View()
+	s += "\n" + m.help.View(m.keys)
+	return s
 }

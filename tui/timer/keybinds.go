@@ -13,7 +13,7 @@ type KeyMap struct {
 }
 
 var DefaultKeyMap = KeyMap{
-	Tab:   key.NewBinding(key.WithKeys("tab"), key.WithHelp("tab", "switch focus")),
+	Tab:   key.NewBinding(key.WithKeys("tab"), key.WithHelp("tab", "switch")),
 	Space: key.NewBinding(key.WithKeys("s", " "), key.WithHelp("<spacebar>", "start")),
 	Quit:  key.NewBinding(key.WithKeys("q", "esc", "ctrl+c"), key.WithHelp("q", "quit")),
 }

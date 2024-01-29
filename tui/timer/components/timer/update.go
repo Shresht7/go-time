@@ -9,7 +9,7 @@ import (
 // UPDATE
 // ------
 
-func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 	switch msg := msg.(type) {
 
 	// Window Resize Event

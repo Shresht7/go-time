@@ -64,10 +64,12 @@ func (m *Model) SetFocus(f focused) {
 	case focusTimer:
 		m.timer.SetFocused(true)
 		m.list.SetFocused(false)
+		m.keys.Tab.SetHelp("tab", "presets")
 
 	case focusList:
 		m.timer.SetFocused(false)
 		m.list.SetFocused(true)
+		m.keys.Tab.SetHelp("tab", "timer")
 
 	}
 }

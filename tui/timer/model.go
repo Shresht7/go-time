@@ -39,9 +39,13 @@ func New() Model {
 		timer: timer.New(),
 		// TODO: make this configurable
 		list: list.New(
-			"5 seconds",
-			"10 seconds",
-			"30 seconds",
+			"00:01:00",
+			"00:05:00",
+			"00:10:00",
+			"00:15:00",
+			"00:30:00",
+			"00:45:00",
+			"00:60:00",
 		),
 		keys: DefaultKeyMap,
 		help: help.New(),

@@ -23,9 +23,18 @@ func Run() {
 // MODEL
 // -----
 
+type focused int
+
+const (
+	focusTimer focused = iota
+	focusList
+)
+
 type Model struct {
 	timer timer.Model // The timer component
 	list  list.Model  // The list component
+
+	focused focused // Which component is focused
 
 	keys KeyMap     // Key bindings model
 	help help.Model // Help menu model
@@ -68,6 +77,15 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.KeyMsg:
 		switch {
 
+		// Keypress: Tab
+		case key.Matches(msg, m.keys.Tab):
+			switch m.focused {
+			case focusTimer:
+				m.focused = focusList
+			case focusList:
+				m.focused = focusTimer
+			}
+
 		// Keypress: Spacebar
 		case key.Matches(msg, m.keys.Space):
 			if !m.timer.Running {
@@ -87,10 +105,15 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	var cmd tea.Cmd
 	var cmds []tea.Cmd
-	m.timer, cmd = m.timer.Update(msg)
-	cmds = append(cmds, cmd)
-	m.list, cmd = m.list.Update(msg)
-	cmds = append(cmds, cmd)
+
+	switch m.focused {
+	case focusTimer:
+		m.timer, cmd = m.timer.Update(msg)
+		cmds = append(cmds, cmd)
+	case focusList:
+		m.list, cmd = m.list.Update(msg)
+		cmds = append(cmds, cmd)
+	}
 
 	return m, tea.Batch(cmds...)
 }
@@ -101,6 +124,17 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 func (m Model) View() string {
 	s := m.timer.View()
 	s += "\n" + m.list.View()
-	s += "\n" + m.list.ViewHelp() + " " + m.help.View(m.keys)
+	s += "\n" + m.FocusedHelp()
+	return s
+}
+
+func (m Model) FocusedHelp() string {
+	var s string
+	switch m.focused {
+	case focusTimer:
+		s = m.help.View(m.keys)
+	case focusList:
+		s = m.list.ViewHelp() + " " + m.help.View(m.keys)
+	}
 	return s
 }

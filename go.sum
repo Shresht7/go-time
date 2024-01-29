@@ -1,5 +1,5 @@
-github.com/Shresht7/go-cli-tools v0.0.0-20230208142627-e59243d58d1f h1:xZNnZexVocfdol7qhDlWjlbjMUROb2XGCSbF5EKORsY=
-github.com/Shresht7/go-cli-tools v0.0.0-20230208142627-e59243d58d1f/go.mod h1:ma2Z9RBcdu8u7FDRjP/0RAjJXqfflkoxHLkBbOsJayU=
+github.com/Shresht7/go-cli-tools v0.1.0 h1:cVX9smEh0FdiKszxPF1HGnG5SVOWjUI6IkGr0qmQ6L0=
+github.com/Shresht7/go-cli-tools v0.1.0/go.mod h1:GVeBzYj80xS9Eq/sOuTIMPLyvTAH9x/gIhRDaIEpsGY=
 github.com/aymanbagabas/go-osc52/v2 v2.0.1 h1:HwpRHbFMcZLEVr42D4p7XBqjyuxQH5SMiErDT4WkJ2k=
 github.com/aymanbagabas/go-osc52/v2 v2.0.1/go.mod h1:uYgXzlJ7ZpABp8OJ+exZzJJhRNQ2ASbcXHWsFqH8hp8=
 github.com/charmbracelet/bubbles v0.17.1 h1:0SIyjOnkrsfDo88YvPgAWvZMwXe26TP6drRvmkjyUu4=

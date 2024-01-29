@@ -71,3 +71,7 @@ func (m *Model) ViewHelp() string {
 func (m *Model) SetFocused(f bool) {
 	m.isFocused = f
 }
+
+func (m *Model) SetPrompt(p string) {
+	m.prompt = p
+}

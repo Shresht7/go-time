@@ -46,7 +46,8 @@ func New() Model {
 		keys: DefaultKeyMap,
 		help: help.New(),
 	}
-	m.SetFocus(focusTimer) // focus the timer by default
+	m.list.SetPrompt("Select a preset:\n") // Set the prompt message for the list
+	m.SetFocus(focusTimer)                 // focus the timer by default
 	return m
 }
 

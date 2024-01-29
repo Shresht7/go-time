@@ -1,22 +1,18 @@
 package clock
 
+import (
+	"github.com/Shresht7/go-time/tui/helpers"
+)
+
 // VIEW
 // ----
 
 // The View function is called every time the model is updated
 func (c *model) View() string {
-	s := "\n" // start with a newline for padding
-
-	s += c.Icon() // add the icon for the current time of day
-
-	// add the time in the format "HH:MM:SS"
-	s += "  " + c.t.Format("15:04:05") + "\t"
-
-	// add the date in the format "Saturday, 27 January 2024"
-	s += c.t.Format("Monday, 2 January 2006")
-
-	// add a newline and some padding at the bottom
-	s += "\n\n"
-
+	s := helpers.FlexBoxRow(
+		c.Icon(),                             // add the icon for the current time of day
+		c.t.Format("15:04:05"),               // add the time in the format "HH:MM:SS"
+		c.t.Format("Monday, 2 January 2006"), // add the date in the format "Saturday, 27 January 2024"
+	).WithSeparator("\t").WithPadding(1).String()
 	return s
 }

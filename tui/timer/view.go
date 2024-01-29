@@ -6,5 +6,8 @@ import "strconv"
 // ----
 
 func (m timerModel) View() string {
-	return strconv.Itoa(m.remaining)
+	s := ""
+	s += strconv.Itoa(m.remaining) + "\n"
+	s += m.help.View(m.keys)
+	return s
 }

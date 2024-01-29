@@ -10,7 +10,7 @@ import (
 // -------
 
 // MsgTick is the message sent by our ticker to update the clock
-type MsgTick struct{ t time.Time }
+type MsgTick struct{ T time.Time }
 
 // COMMAND
 // -------

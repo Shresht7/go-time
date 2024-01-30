@@ -14,8 +14,8 @@ import (
 
 // TODO: This is utter chaos and needs a complete rewrite!
 
-// Creates a new Calendar
-func NewMonth(t time.Time) string {
+// Renders a calender string
+func Render(t time.Time) string {
 	// Create calendar grid
 	grid := CreateCalendarGrid(t)
 

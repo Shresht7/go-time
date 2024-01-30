@@ -10,6 +10,6 @@ import (
 // Show calendar command
 func ShowCalendar() {
 	now := time.Now()
-	calendar := calendar.NewMonth(now)
+	calendar := calendar.Render(now)
 	fmt.Print(calendar)
 }

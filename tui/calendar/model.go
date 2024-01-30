@@ -20,5 +20,5 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (m Model) View() string {
-	return calendar.NewMonth(time.Now())
+	return calendar.Render(time.Now())
 }

@@ -3,15 +3,13 @@ package cmd
 import (
 	"fmt"
 	"time"
+
+	"github.com/Shresht7/go-time/helpers"
 )
 
 // Shows the current time
 func ShowTime(now time.Time) {
-
-	time := now.Format("15:04:05")
-	weekday := now.Weekday()
-	year, month, day := now.Date()
-
-	fmt.Printf("\n%s  •  %s  •  %d %s %d\n\n", time, weekday, day, month, year)
-
+	icon := helpers.GetIcon(now)
+	timeAndDate := helpers.FormatTimeAndDate(now)
+	fmt.Printf("\n%s   %s\n\n", icon, timeAndDate)
 }

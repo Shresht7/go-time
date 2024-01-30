@@ -26,6 +26,7 @@ func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 
 	case tea.KeyMsg:
 
+		// If the timer isn't focused, don't handle any key presses
 		if !m.isFocused {
 			return m, nil
 		}

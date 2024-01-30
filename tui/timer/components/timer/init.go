@@ -8,5 +8,8 @@ import (
 // ----
 
 func (m Model) Init() tea.Cmd {
-	return tick()
+	return tea.Batch(
+		m.spinner.Tick,
+		tick(),
+	)
 }

@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/charmbracelet/bubbles/help"
+	"github.com/charmbracelet/bubbles/spinner"
 )
 
 // MODEL
@@ -16,14 +17,16 @@ type Model struct {
 
 	isFocused bool // Whether the timer is focused
 
-	keys KeyMap     // Keybindings model
-	help help.Model // Help model
+	spinner spinner.Model // Spinner model
+	keys    KeyMap        // Keybindings model
+	help    help.Model    // Help model
 }
 
 func New() Model {
 	return Model{
 		remaining: 72,
 		preset:    72,
+		spinner:   spinner.New(),
 		keys:      DefaultKeyMap,
 		help:      help.New(),
 	}

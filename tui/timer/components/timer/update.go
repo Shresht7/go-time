@@ -10,13 +10,16 @@ import (
 // ------
 
 func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
+	var cmd tea.Cmd
+	var cmds []tea.Cmd
+
 	switch msg := msg.(type) {
 
 	case helpers.MsgTick:
 		if m.Running {
 			m.remaining = m.remaining - 1
 		}
-		return m, tick()
+		cmds = append(cmds, tick())
 
 	case tea.KeyMsg:
 
@@ -42,5 +45,8 @@ func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 		}
 	}
 
-	return m, nil
+	m.spinner, cmd = m.spinner.Update(msg)
+	cmds = append(cmds, cmd)
+
+	return m, tea.Batch(cmds...)
 }

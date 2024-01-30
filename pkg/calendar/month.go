@@ -81,7 +81,7 @@ func CreateCalendarGrid(t time.Time) [5][]string {
 			}
 
 			//	If today, invert color
-			if d.Day() == t.Day() {
+			if d.Day() == time.Now().Day() && d.Month() == time.Now().Month() && d.Year() == time.Now().Year() {
 				str = styles.Inverse(str)
 			}
 

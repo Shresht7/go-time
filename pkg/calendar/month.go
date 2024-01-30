@@ -49,20 +49,24 @@ func MonthAndYear(t time.Time) string {
 func WeekdayHeaders() string {
 	s := ""
 	for c := 0; c < 7; c++ {
-		s += fmt.Sprintf(styles.Bold("%2s"), WEEKDAYS[c]) + " "
+		day := WEEKDAYS[c]
+		if c == 6 {
+			day = colors.Red(fmt.Sprintf("%2s", day))
+		}
+		s += fmt.Sprintf(styles.Bold("%2s"), day) + " "
 	}
 	return s
 }
 
-func CreateCalendarGrid(t time.Time) [5][]string {
+func CreateCalendarGrid(t time.Time) [6][]string {
 	//	Grid to hold dates
-	grid := [5][]string{}
+	grid := [6][]string{}
 
 	// Get the first day of the month
 	firstDay := time.Date(t.Year(), t.Month(), 1, 0, 0, 0, 0, t.Location()).Weekday()
 
 	//	Add dates to calendar grid
-	for r := 1; r < len(grid); r++ { // We start from 1 because the first row is for weekday headers
+	for r := 1; r < len(grid); r++ {
 		grid[r] = []string{}
 		for c := 1; c <= 7; c++ {
 

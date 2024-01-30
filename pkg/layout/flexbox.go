@@ -60,7 +60,6 @@ func (f *FlexBox) String() string {
 			s += gap
 		}
 	}
-	s += "\n"
 
 	s += padding
 

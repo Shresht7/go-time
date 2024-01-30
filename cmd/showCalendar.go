@@ -92,7 +92,8 @@ func (cal *calendarMonth) show() {
 }
 
 // Show calendar command
-func ShowCalendar(now time.Time) {
+func ShowCalendar() {
+	now := time.Now()
 	calendar := NewCalendarMonth(now)
 	calendar.show()
 }

@@ -3,7 +3,6 @@ package main
 import (
 	"io"
 	"os"
-	"time"
 
 	"github.com/Shresht7/go-time/cmd"
 	"github.com/Shresht7/go-time/tui/clock"
@@ -16,8 +15,6 @@ import (
 // ---
 
 func run(args []string, stdout io.Writer) error {
-
-	now := time.Now() //	Get the current time
 
 	//	If no command was passed, then show time and exit
 	if len(os.Args) < 2 {
@@ -39,10 +36,10 @@ func run(args []string, stdout io.Writer) error {
 		clock.Run()
 
 	case "date":
-		cmd.ShowDate(now)
+		cmd.ShowDate()
 
 	case "calendar":
-		cmd.ShowCalendar(now)
+		cmd.ShowCalendar()
 
 	case "stopwatch":
 		stopwatch.Run()

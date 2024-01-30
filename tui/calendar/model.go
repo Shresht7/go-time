@@ -9,6 +9,7 @@ import (
 )
 
 type Model struct {
+	t time.Time
 }
 
 func (m Model) Init() tea.Cmd {
@@ -20,5 +21,5 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (m Model) View() string {
-	return calendar.Render(time.Now())
+	return calendar.Render(m.t)
 }

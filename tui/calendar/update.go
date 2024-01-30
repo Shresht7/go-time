@@ -19,11 +19,11 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 		// Previous month
 		case key.Matches(msg, m.keys.Left):
-			m.t = m.t.AddDate(0, -1, 0)
+			m.PrevMonth()
 
 		// Next month
 		case key.Matches(msg, m.keys.Right):
-			m.t = m.t.AddDate(0, 1, 0)
+			m.NextMonth()
 
 		// Quit
 		case key.Matches(msg, m.keys.Quit):

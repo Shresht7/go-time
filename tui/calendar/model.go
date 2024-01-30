@@ -20,3 +20,13 @@ func New() Model {
 		help: help.New(),
 	}
 }
+
+func (m *Model) NextMonth() {
+	t := time.Date(m.t.Year(), m.t.Month(), 1, 0, 0, 0, 0, time.UTC)
+	m.t = t.AddDate(0, 1, 0)
+}
+
+func (m *Model) PrevMonth() {
+	t := time.Date(m.t.Year(), m.t.Month(), 1, 0, 0, 0, 0, time.UTC)
+	m.t = t.AddDate(0, -1, 0)
+}

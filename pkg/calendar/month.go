@@ -14,6 +14,8 @@ import (
 
 // TODO: This is utter chaos and needs a complete rewrite!
 
+var WEEKDAYS = []string{"M", "T", "W", "T", "F", "S", "S"}
+
 // Renders a calender string
 func Render(t time.Time) string {
 	var sb strings.Builder

@@ -27,10 +27,12 @@ func New() Model {
 
 func (m *Model) Start() {
 	m.Running = true
+	m.keys.Space.SetHelp("spacebar", "pause")
 }
 
 func (m *Model) Stop() {
 	m.Running = false
+	m.keys.Space.SetHelp("spacebar", "resume")
 }
 
 func (m *Model) Set(t string) {

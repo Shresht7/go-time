@@ -28,8 +28,8 @@ func New() Model {
 	s.Spinner = spinner.Dot
 	s.Style = lipgloss.NewStyle().Foreground(lipgloss.Color("12"))
 	return Model{
-		remaining: 72,
-		preset:    72,
+		remaining: 300,
+		preset:    300,
 		spinner:   s,
 		keys:      DefaultKeyMap,
 		help:      help.New(),

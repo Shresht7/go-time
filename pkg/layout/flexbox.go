@@ -17,7 +17,9 @@ func NewFlexBox(contents ...string) *FlexBox {
 	return &FlexBox{
 		contents:  contents,
 		separator: " ",
+		gap:       1,
 		pad:       "\n",
+		padding:   1,
 	}
 }
 
@@ -67,10 +69,10 @@ func (f *FlexBox) String() string {
 
 // Creates a Row
 func Row(contents ...string) *FlexBox {
-	return NewFlexBox(contents...).WithSeparator(" ")
+	return NewFlexBox(contents...).WithSeparator(" ").WithPad("\n")
 }
 
 // Creates a Column
 func Column(contents ...string) *FlexBox {
-	return NewFlexBox(contents...).WithSeparator("\n")
+	return NewFlexBox(contents...).WithSeparator("\n").WithPad(" ")
 }

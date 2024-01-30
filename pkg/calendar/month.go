@@ -13,6 +13,8 @@ import (
 // MONTH
 // -----
 
+// TODO: This is utter chaos and needs a complete rewrite!
+
 type Month struct {
 	t    time.Time
 	grid [6][]string
@@ -23,7 +25,7 @@ func NewMonth(t time.Time) *Month {
 	//	Grid to hold dates
 	grid := [6][]string{}
 
-	//	Add weekday headers
+	//	Add weekday headers to the first row
 	for c := 0; c < 7; c++ {
 		grid[0] = append(grid[0], fmt.Sprintf(styles.Bold("%2s"), WEEKDAYS[c]))
 	}
@@ -34,10 +36,10 @@ func NewMonth(t time.Time) *Month {
 	//	Add dates to calendar grid
 	for r := 1; r < len(grid); r++ { // We start from 1 because the first row is for weekday headers
 		grid[r] = []string{}
-		for c := 1; c < 8; c++ {
+		for c := 1; c <= 7; c++ {
 
 			//	Get date of month
-			d := time.Date(t.Year(), t.Month(), c+((r-1)*7)-int(firstDay)+1, 0, 0, 0, 0, t.Location())
+			d := time.Date(t.Year(), t.Month(), ((r-1)*7)+c+1-int(firstDay), 0, 0, 0, 0, t.Location())
 			str := fmt.Sprintf("%2d", d.Day())
 
 			//	If date is of previous or next month then prefix with ~. Used later for special formatting

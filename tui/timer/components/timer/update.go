@@ -18,6 +18,9 @@ func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 	case helpers.MsgTick:
 		if m.Running {
 			m.remaining = m.remaining - 1
+			if m.remaining <= 0 {
+				m.Stop()
+			}
 		}
 		cmds = append(cmds, tick())
 

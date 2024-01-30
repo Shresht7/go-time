@@ -36,6 +36,7 @@ func (m *Model) Stop() {
 }
 
 func (m *Model) Set(t string) {
+	m.Stop()
 	switch t {
 	case "1 Minute":
 		m.preset = 60

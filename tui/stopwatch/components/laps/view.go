@@ -3,7 +3,7 @@ package laps
 import (
 	"fmt"
 
-	"github.com/Shresht7/go-time/tui/helpers"
+	"github.com/Shresht7/go-time/pkg/format"
 	"github.com/charmbracelet/lipgloss"
 )
 
@@ -30,8 +30,8 @@ func (m Model) View() string {
 	for i, lap := range m.laps {
 		s += fmt.Sprintf("%s\t%s\t%s\n",
 			m.styleIndex(i),
-			helpers.FormatDuration(lap.duration()),
-			helpers.FormatDuration(m.Sum(i)),
+			format.Duration(lap.duration()),
+			format.Duration(m.Sum(i)),
 		)
 	}
 

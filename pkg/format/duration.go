@@ -1,4 +1,4 @@
-package helpers
+package format
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 )
 
 // Returns the elapsed time duration as a string in the format "HH:MM:SS:MS"
-func FormatDuration(elapsed time.Duration) string {
+func Duration(elapsed time.Duration) string {
 	s := []string{}
 
 	hours := int(elapsed.Hours())

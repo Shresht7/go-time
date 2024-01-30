@@ -1,7 +1,7 @@
 package clock
 
 import (
-	"github.com/Shresht7/go-time/helpers"
+	"github.com/Shresht7/go-time/pkg/format"
 )
 
 // VIEW
@@ -9,7 +9,8 @@ import (
 
 // The View function is called every time the model is updated
 func (c *model) View() string {
-	icon := helpers.GetIcon(c.t)
-	timeAndDate := helpers.FormatTimeAndDate(c.t)
-	return "\n" + icon + "   " + timeAndDate + "\n\n"
+	icon := format.Icon(c.t)
+	timeAndDate := format.TimeAndDate(c.t)
+	result := icon + "   " + timeAndDate
+	return "\n" + result + "\n\n"
 }

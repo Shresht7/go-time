@@ -5,6 +5,7 @@ import (
 
 	"github.com/charmbracelet/bubbles/help"
 	"github.com/charmbracelet/bubbles/spinner"
+	"github.com/charmbracelet/lipgloss"
 )
 
 // MODEL
@@ -23,10 +24,13 @@ type Model struct {
 }
 
 func New() Model {
+	s := spinner.New()
+	s.Spinner = spinner.Dot
+	s.Style = lipgloss.NewStyle().Foreground(lipgloss.Color("12"))
 	return Model{
 		remaining: 72,
 		preset:    72,
-		spinner:   spinner.New(),
+		spinner:   s,
 		keys:      DefaultKeyMap,
 		help:      help.New(),
 	}

@@ -9,11 +9,9 @@ import (
 
 func (m Model) View() string {
 	var s string
-	if m.Running {
-		s += m.spinner.View() + "  "
-	} else {
-		s += "   "
-	}
 	s += m.FormatTime()
+	if m.Running {
+		s += " " + m.spinner.View()
+	}
 	return lipgloss.NewStyle().Padding(1, 2).Render(s)
 }

@@ -14,9 +14,8 @@ import (
 // -----
 
 type Month struct {
-	t        time.Time
-	grid     [6][]string
-	firstDay time.Weekday
+	t    time.Time
+	grid [6][]string
 }
 
 // Creates a new Calendar
@@ -51,9 +50,8 @@ func NewMonth(t time.Time) *Month {
 	}
 
 	return &Month{
-		t:        t,
-		grid:     grid,
-		firstDay: firstDay,
+		t:    t,
+		grid: grid,
 	}
 }
 

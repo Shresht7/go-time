@@ -1,6 +1,10 @@
 package list
 
-import "github.com/charmbracelet/lipgloss"
+import (
+	"strings"
+
+	"github.com/charmbracelet/lipgloss"
+)
 
 // STYLES
 // ------
@@ -38,5 +42,6 @@ func (m Model) ViewList() string {
 			s += "  " + item + "\n"
 		}
 	}
+	s = strings.TrimSuffix(s, "\n")
 	return s
 }

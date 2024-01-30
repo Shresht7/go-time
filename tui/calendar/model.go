@@ -12,6 +12,12 @@ type Model struct {
 	t time.Time
 }
 
+func New() Model {
+	return Model{
+		t: time.Now(),
+	}
+}
+
 func (m Model) Init() tea.Cmd {
 	return nil
 }

@@ -28,6 +28,11 @@ func New(items ...string) Model {
 	}
 }
 
+// Get the item at the given index
+func (m Model) At(index int) string {
+	return m.items[index]
+}
+
 // Set the prompt
 func (m *Model) SetPrompt(p string) {
 	m.prompt = p

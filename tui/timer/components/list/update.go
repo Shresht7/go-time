@@ -35,7 +35,7 @@ func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 }
 
 // A message to select the currently selected item
-type MsgSelect struct{ index int }
+type MsgSelect struct{ Index int }
 
 // A command to select the currently selected item
 func (m *Model) CmdSelect() tea.Cmd {

@@ -21,7 +21,8 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	// Preset Selection Event
 	case list.MsgSelect:
-		m.timer.Reset()
+		preset := m.list.At(msg.Index)
+		m.timer.Set(preset)
 		m.SetFocus(focusTimer)
 
 	// Key Press Event

@@ -8,7 +8,7 @@ import tea "github.com/charmbracelet/bubbletea"
 
 // Run starts the clock bubble-tea program
 func Run() {
-	clock := newClockModel()
+	clock := new()
 	p := tea.NewProgram(clock)
 	if _, err := p.Run(); err != nil {
 		panic(err)

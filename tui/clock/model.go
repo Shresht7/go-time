@@ -14,7 +14,7 @@ type model struct {
 }
 
 // Instantiates a clock model
-func newClockModel() *model {
+func new() *model {
 	return &model{
 		t: time.Now(),
 	}

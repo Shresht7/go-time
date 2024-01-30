@@ -57,9 +57,11 @@ func NewMonth(t time.Time) *Month {
 	}
 }
 
-func (cal *Month) Show() {
+func (cal *Month) String() string {
+	var s string
+
 	//	Print month and calendar
-	fmt.Printf(styles.Bold("\n%11s %d\n\n"), cal.t.Month(), cal.t.Year())
+	s += fmt.Sprintf(styles.Bold("\n%11s %d\n\n"), cal.t.Month(), cal.t.Year())
 
 	for _, row := range cal.grid {
 		for c, date := range row {
@@ -83,13 +85,14 @@ func (cal *Month) Show() {
 			}
 
 			//	Spacing
-			fmt.Print(str + " ")
+			s += str + " "
 		}
 
-		fmt.Print("\n")
+		s += "\n"
 
 	}
 
-	fmt.Println() //	Empty line
+	s += "\n"
 
+	return s
 }

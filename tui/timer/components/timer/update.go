@@ -22,10 +22,10 @@ func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 		case key.Matches(msg, m.keys.Space):
 			if !m.Running {
 				m.Start()
-				m.keys.Space.SetHelp("<spacebar>", "pause")
+				m.keys.Space.SetHelp("spacebar", "pause")
 			} else {
 				m.Stop()
-				m.keys.Space.SetHelp("<spacebar>", "resume")
+				m.keys.Space.SetHelp("spacebar", "resume")
 			}
 		}
 	}

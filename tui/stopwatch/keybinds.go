@@ -14,7 +14,7 @@ type KeyMap struct {
 }
 
 var DefaultKeyMap = KeyMap{
-	Space: key.NewBinding(key.WithKeys("s", " "), key.WithHelp("<spacebar>", "start")),
+	Space: key.NewBinding(key.WithKeys("s", " "), key.WithHelp("spacebar", "start")),
 	Enter: key.NewBinding(key.WithKeys("enter"), key.WithHelp("<enter>", "lap")),
 	R:     key.NewBinding(key.WithKeys("r"), key.WithHelp("r", "reset")),
 	Quit:  key.NewBinding(key.WithKeys("q", "esc", "ctrl+c"), key.WithHelp("q", "quit")),

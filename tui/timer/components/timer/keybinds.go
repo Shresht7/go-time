@@ -11,7 +11,7 @@ type KeyMap struct {
 }
 
 var DefaultKeyMap = KeyMap{
-	Space: key.NewBinding(key.WithKeys("s", " "), key.WithHelp("<spacebar>", "start")),
+	Space: key.NewBinding(key.WithKeys("s", " "), key.WithHelp("spacebar", "start")),
 }
 
 // ShortHelp returns a slice of keybindings that are used in the short help

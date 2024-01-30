@@ -16,27 +16,40 @@ import (
 
 // Renders a calender string
 func Render(t time.Time) string {
+	var sb strings.Builder
+
 	// Create calendar grid
 	grid := CreateCalendarGrid(t)
 
-	//	Convert grid to string
-	var sb strings.Builder
-	sb.WriteString(fmt.Sprintf(styles.Bold("\n%11s %d\n\n"), t.Month(), t.Year()))
+	// Add month and year
+	sb.WriteString(MonthAndYear(t))
 
-	//	Add weekday headers to the first row
-	for c := 0; c < 7; c++ {
-		sb.WriteString(fmt.Sprintf(styles.Bold("%2s"), WEEKDAYS[c]))
-		sb.WriteString(" ")
-	}
+	// Add weekday headers
+	sb.WriteString(WeekdayHeaders())
 
+	// Add calendar grid
 	for _, row := range grid {
 		sb.WriteString(strings.Join(row, " "))
 		sb.WriteString("\n")
 	}
 
+	// Add empty line
 	sb.WriteString("\n")
 
+	// Build and return string
 	return sb.String()
+}
+
+func MonthAndYear(t time.Time) string {
+	return fmt.Sprintf(styles.Bold("\n%11s %d\n\n"), t.Month(), t.Year())
+}
+
+func WeekdayHeaders() string {
+	s := ""
+	for c := 0; c < 7; c++ {
+		s += fmt.Sprintf(styles.Bold("%2s"), WEEKDAYS[c]) + " "
+	}
+	return s
 }
 
 func CreateCalendarGrid(t time.Time) [5][]string {

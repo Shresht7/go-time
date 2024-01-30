@@ -14,8 +14,9 @@ import (
 // -----
 
 type Month struct {
-	t    time.Time
-	grid [6][]string
+	t        time.Time
+	grid     [6][]string
+	firstDay time.Weekday
 }
 
 // Creates a new Calendar
@@ -24,18 +25,20 @@ func NewMonth(t time.Time) *Month {
 	grid := [6][]string{}
 
 	//	Add weekday headers
-	grid[0] = WEEKDAYS
+	for c := 0; c < 7; c++ {
+		grid[0] = append(grid[0], fmt.Sprintf(styles.Bold("%2s"), WEEKDAYS[c]))
+	}
 
 	// Get the first day of the month
-	firstDay := time.Date(t.Year(), t.Month(), 1, 0, 0, 0, 0, t.Location()).Weekday() //	First day of the month
+	firstDay := time.Date(t.Year(), t.Month(), 1, 0, 0, 0, 0, t.Location()).Weekday()
 
 	//	Add dates to calendar grid
-	for r := 1; r < len(grid); r++ {
+	for r := 1; r < len(grid); r++ { // We start from 1 because the first row is for weekday headers
 		grid[r] = []string{}
 		for c := 1; c < 8; c++ {
 
 			//	Get date of month
-			d := time.Date(t.Year(), t.Month(), c+((r-1)*7)-int(firstDay), 0, 0, 0, 0, t.Location())
+			d := time.Date(t.Year(), t.Month(), c+((r-1)*7)-int(firstDay)+1, 0, 0, 0, 0, t.Location())
 			str := fmt.Sprintf("%2d", d.Day())
 
 			//	If date is of previous or next month then prefix with ~. Used later for special formatting
@@ -47,7 +50,11 @@ func NewMonth(t time.Time) *Month {
 		}
 	}
 
-	return &Month{t, grid}
+	return &Month{
+		t:        t,
+		grid:     grid,
+		firstDay: firstDay,
+	}
 }
 
 func (cal *Month) Show() {

@@ -6,7 +6,6 @@ import (
 )
 
 func ShowDate(now time.Time) {
-	weekday := now.Weekday()
-	year, month, day := now.Date()
-	fmt.Printf("\n%s, %d %s %d\n\n", weekday, day, month, year)
+	date := now.Format("Monday, 2 January 2006")
+	fmt.Println("\n" + date + "\n")
 }

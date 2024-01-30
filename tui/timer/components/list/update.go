@@ -14,6 +14,7 @@ func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 	// Key Press
 	case tea.KeyMsg:
 
+		// If the list isn't focused, don't handle any key presses
 		if !m.isFocused {
 			return m, nil
 		}

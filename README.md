@@ -1,20 +1,20 @@
-# `go-time`
+# It's `go-time`
 
-A command-line interface to show time.
-
-![calendar](/screenshot.png)
+A clock for the terminal.
 
 ## Commands
 
-### clock
+### `time`
 
-Shows the clock
+Shows the current time
 
 ```sh
-go-time clock
+go-time
+go-time now
+go-time time
 ```
 
-### date
+### `date`
 
 Shows the current date
 
@@ -22,7 +22,7 @@ Shows the current date
 go-time date
 ```
 
-### calendar
+### `calendar`
 
 Shows the calendar
 
@@ -30,10 +30,44 @@ Shows the calendar
 go-time calendar
 ```
 
-### time
+![calendar](/screenshot.png)
 
-Shows the current time
+## TUI
+
+### `clock`
+
+Shows the clock
 
 ```sh
-go-time time
+go-time clock
 ```
+
+### `calendar`
+
+Shows the calendar
+
+```sh
+go-time cal
+```
+
+## `stopwatch`
+
+Shows the stopwatch
+
+```sh
+go-time stopwatch
+```
+
+## `timer`
+
+Shows the timer
+
+```sh
+go-time timer
+```
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE) - see the [LICENSE](LICENSE) file for details

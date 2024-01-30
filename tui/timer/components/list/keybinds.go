@@ -15,15 +15,15 @@ type KeyModel struct {
 // DefaultKeyModel is the default keybindings for the list component
 var DefaultKeyModel = KeyModel{
 	Select:   key.NewBinding(key.WithKeys("enter"), key.WithHelp("enter", "select")),
-	Previous: key.NewBinding(key.WithKeys("up", "k"), key.WithHelp("up/k", "previous")),
-	Next:     key.NewBinding(key.WithKeys("down", "j"), key.WithHelp("down/j", "next")),
+	Previous: key.NewBinding(key.WithKeys("up", "k"), key.WithHelp("↑/k", "previous")),
+	Next:     key.NewBinding(key.WithKeys("down", "j"), key.WithHelp("↓/j", "next")),
 }
 
 // AltKeyModel is an alternate keybindings for the list component
 var AltKeyModel = KeyModel{
 	Select:   key.NewBinding(key.WithKeys("enter"), key.WithHelp("enter", "select")),
-	Previous: key.NewBinding(key.WithKeys("left", "h"), key.WithHelp("left/h", "previous")),
-	Next:     key.NewBinding(key.WithKeys("right", "l"), key.WithHelp("right/l", "next")),
+	Previous: key.NewBinding(key.WithKeys("left", "h"), key.WithHelp("←/h", "previous")),
+	Next:     key.NewBinding(key.WithKeys("right", "l"), key.WithHelp("→/l", "next")),
 }
 
 // ShortHelp returns a slice of keybindings that are used in the short help

@@ -3,8 +3,9 @@ package clock
 import (
 	"time"
 
-	"github.com/Shresht7/go-time/tui/helpers"
 	tea "github.com/charmbracelet/bubbletea"
+
+	"github.com/Shresht7/go-time/tui/helpers"
 )
 
 // TICKER

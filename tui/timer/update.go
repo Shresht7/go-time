@@ -48,14 +48,11 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	var cmd tea.Cmd
 	var cmds []tea.Cmd
 
-	switch m.focused {
-	case focusTimer:
-		m.timer, cmd = m.timer.Update(msg)
-		cmds = append(cmds, cmd)
-	case focusList:
-		m.list, cmd = m.list.Update(msg)
-		cmds = append(cmds, cmd)
-	}
+	m.timer, cmd = m.timer.Update(msg)
+	cmds = append(cmds, cmd)
+
+	m.list, cmd = m.list.Update(msg)
+	cmds = append(cmds, cmd)
 
 	return m, tea.Batch(cmds...)
 }

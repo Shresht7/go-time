@@ -13,6 +13,11 @@ func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 
 	// Key Press
 	case tea.KeyMsg:
+
+		if !m.isFocused {
+			return m, nil
+		}
+
 		switch {
 
 		// Select

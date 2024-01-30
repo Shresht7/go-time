@@ -19,6 +19,11 @@ func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 		return m, tick()
 
 	case tea.KeyMsg:
+
+		if !m.isFocused {
+			return m, nil
+		}
+
 		switch {
 
 		// Keypress: Spacebar

@@ -1,8 +1,6 @@
 package timer
 
 import (
-	"strconv"
-
 	"github.com/charmbracelet/lipgloss"
 )
 
@@ -14,7 +12,7 @@ var focusedStyle = borderStyle.Copy().BorderForeground(lipgloss.Color("12"))
 var unfocusedStyle = borderStyle.Copy().BorderForeground(lipgloss.Color("240"))
 
 func (m Model) View() string {
-	s := strconv.Itoa(m.remaining)
+	s := m.FormatTime()
 	if m.isFocused {
 		return focusedStyle.Render(s)
 	}

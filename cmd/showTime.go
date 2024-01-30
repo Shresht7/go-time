@@ -8,10 +8,10 @@ import (
 // Shows the current time
 func ShowTime(now time.Time) {
 
-	hours, minutes, seconds := getClock(now)
+	time := now.Format("15:04:05")
 	weekday := now.Weekday()
 	year, month, day := now.Date()
 
-	fmt.Printf("\n%s:%s:%s  •  %s  •  %d %s %d\n\n", hours, minutes, seconds, weekday, day, month, year)
+	fmt.Printf("\n%s  •  %s  •  %d %s %d\n\n", time, weekday, day, month, year)
 
 }

@@ -25,14 +25,14 @@ func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case msgStart:
 		m.start = time.Now().Add(-m.elapsed)
 		m.running = true
-		m.keys.Space.SetHelp("<spacebar>", "stop")
+		m.keys.Space.SetHelp("spacebar", "stop")
 		return m, nil
 
 	// Stopwatch Stop
 	case msgStop:
 		m.end = time.Now()
 		m.running = false
-		m.keys.Space.SetHelp("<spacebar>", "start")
+		m.keys.Space.SetHelp("spacebar", "start")
 		return m, nil
 
 	// Stopwatch Lap
@@ -47,7 +47,7 @@ func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.elapsed = 0
 		m.running = false
 		m.laps.Reset()
-		m.keys.Space.SetHelp("<spacebar>", "start")
+		m.keys.Space.SetHelp("spacebar", "start")
 		return m, nil
 
 	// Stopwatch Tick

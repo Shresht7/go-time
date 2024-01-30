@@ -31,8 +31,7 @@ func Render(t time.Time) string {
 
 	// Add calendar grid
 	for _, row := range grid {
-		sb.WriteString(strings.Join(row, " "))
-		sb.WriteString("\n")
+		sb.WriteString(strings.Join(row, " ") + "\n")
 	}
 
 	// Add empty line

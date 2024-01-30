@@ -21,7 +21,7 @@ func run(args []string, stdout io.Writer) error {
 
 	//	If no command was passed, then show time and exit
 	if len(os.Args) < 2 {
-		cmd.ShowTime(now)
+		cmd.ShowTime()
 		os.Exit(0)
 	}
 
@@ -30,10 +30,10 @@ func run(args []string, stdout io.Writer) error {
 	switch command {
 
 	case "now":
-		cmd.ShowTime(now)
+		cmd.ShowTime()
 
 	case "time":
-		cmd.ShowTime(now)
+		cmd.ShowTime()
 
 	case "clock":
 		clock.Run()
@@ -51,7 +51,7 @@ func run(args []string, stdout io.Writer) error {
 		timer.Run()
 
 	default:
-		cmd.ShowTime(now)
+		cmd.ShowTime()
 
 	}
 

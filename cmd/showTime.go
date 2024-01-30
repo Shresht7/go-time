@@ -8,7 +8,8 @@ import (
 )
 
 // Shows the current time and date
-func ShowTime(now time.Time) {
+func ShowTime() {
+	now := time.Now()
 	icon := format.Icon(now)
 	timeAndDate := format.TimeAndDate(now)
 	result := icon + "   " + timeAndDate

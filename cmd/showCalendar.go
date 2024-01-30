@@ -11,5 +11,5 @@ import (
 func ShowCalendar() {
 	now := time.Now()
 	calendar := calendar.NewMonth(now)
-	fmt.Print(calendar.String())
+	fmt.Print(calendar)
 }

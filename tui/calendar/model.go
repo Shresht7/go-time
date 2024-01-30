@@ -1,13 +1,14 @@
 package calendar
 
 import (
+	"time"
+
 	tea "github.com/charmbracelet/bubbletea"
 
 	"github.com/Shresht7/go-time/pkg/calendar"
 )
 
 type Model struct {
-	cal *calendar.Month
 }
 
 func (m Model) Init() tea.Cmd {
@@ -19,5 +20,5 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (m Model) View() string {
-	return m.cal.String()
+	return calendar.NewMonth(time.Now())
 }

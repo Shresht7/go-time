@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// Shows the current date
 func ShowDate() {
 	now := time.Now()
 	date := now.Format("Monday, 2 January 2006")

@@ -12,7 +12,7 @@ import (
 // -----
 
 // Represents a stopwatch
-type stopwatchModel struct {
+type Model struct {
 	running bool          // Whether the stopwatch is running
 	start   time.Time     // The time the stopwatch was started
 	end     time.Time     // The time the stopwatch was stopped
@@ -25,8 +25,8 @@ type stopwatchModel struct {
 
 // Creates a new stopwatch model. Initializes the default key bindings and
 // help menu. The stopwatch is "stopped" by default.
-func newStopwatchModel() *stopwatchModel {
-	return &stopwatchModel{
+func New() *Model {
+	return &Model{
 		keys: DefaultKeyMap,
 		help: help.New(),
 	}

@@ -12,7 +12,7 @@ import (
 // ------
 
 // The Update function is called when events happen, like keypresses
-func (m *stopwatchModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 
 	// Window Resize Event

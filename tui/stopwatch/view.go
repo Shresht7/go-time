@@ -11,7 +11,7 @@ import (
 // ----
 
 // The View function is responsible for rendering the UI.
-func (m *stopwatchModel) View() string {
+func (m *Model) View() string {
 	s := lipgloss.JoinVertical(lipgloss.Left, helpers.Filter(
 		"\n"+format.Duration(m.elapsed)+"\n",
 		m.laps.View(),

@@ -9,7 +9,7 @@ import (
 // ---
 
 func Run() {
-	stopwatch := newStopwatchModel()
+	stopwatch := New()
 	p := tea.NewProgram(stopwatch)
 	if _, err := p.Run(); err != nil {
 		panic(err)

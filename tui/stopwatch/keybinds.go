@@ -13,9 +13,10 @@ type KeyMap struct {
 	Quit  key.Binding
 }
 
+// The default key bindings for the stopwatch
 var DefaultKeyMap = KeyMap{
 	Space: key.NewBinding(key.WithKeys("s", " "), key.WithHelp("spacebar", "start")),
-	Enter: key.NewBinding(key.WithKeys("enter"), key.WithHelp("<enter>", "lap")),
+	Enter: key.NewBinding(key.WithKeys("enter"), key.WithHelp("enter", "lap")),
 	R:     key.NewBinding(key.WithKeys("r"), key.WithHelp("r", "reset")),
 	Quit:  key.NewBinding(key.WithKeys("q", "esc", "ctrl+c"), key.WithHelp("q", "quit")),
 }

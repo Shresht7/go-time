@@ -30,7 +30,7 @@ func (m Model) View() string {
 	for i, lap := range m.laps {
 		s += fmt.Sprintf("%s\t%s\t%s\n",
 			m.styleIndex(i),
-			format.Duration(lap.duration()),
+			format.Duration(lap.duration),
 			format.Duration(m.Sum(i)),
 		)
 	}

@@ -16,8 +16,8 @@ func New() Model {
 }
 
 // Adds a lap time to the list
-func (m *Model) Add(start, end time.Time) {
-	m.laps = append(m.laps, lap{start, end})
+func (m *Model) Add(start time.Time, duration time.Duration) {
+	m.laps = append(m.laps, lap{start, duration})
 }
 
 // Clears the list of lap times
@@ -35,14 +35,15 @@ func (m Model) LastOr(fallback time.Time) time.Time {
 	if m.Len() == 0 {
 		return fallback
 	}
-	return m.laps[m.Len()-1].end
+	lastLap := m.laps[m.Len()-1]
+	return lastLap.start.Add(lastLap.duration)
 }
 
 // Returns the shortest lap time in the list
 func (m Model) Shortest() int {
 	shortest := 0
 	for i, lap := range m.laps {
-		if lap.duration() < m.laps[shortest].duration() {
+		if lap.duration < m.laps[shortest].duration {
 			shortest = i
 		}
 	}
@@ -53,7 +54,7 @@ func (m Model) Shortest() int {
 func (m Model) Longest() int {
 	longest := 0
 	for i, lap := range m.laps {
-		if lap.duration() > m.laps[longest].duration() {
+		if lap.duration > m.laps[longest].duration {
 			longest = i
 		}
 	}
@@ -64,7 +65,7 @@ func (m Model) Longest() int {
 func (m Model) Sum(i int) time.Duration {
 	var total time.Duration
 	for _, lap := range m.laps[:i+1] {
-		total += lap.duration()
+		total += lap.duration
 	}
 	return total
 }

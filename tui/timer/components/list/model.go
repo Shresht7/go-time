@@ -56,8 +56,3 @@ func (m *Model) Next() {
 func (m *Model) SetFocused(f bool) {
 	m.isFocused = f
 }
-
-// Returns the help menu for the list component
-func (m *Model) ViewHelp() string {
-	return m.help.View(m.keys)
-}

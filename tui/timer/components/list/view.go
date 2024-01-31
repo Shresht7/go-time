@@ -45,3 +45,8 @@ func (m Model) ViewList() string {
 	s = strings.TrimSuffix(s, "\n")
 	return s
 }
+
+// Returns the help menu for the list component
+func (m *Model) ViewHelp() string {
+	return m.help.View(m.keys)
+}

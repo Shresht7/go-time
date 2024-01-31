@@ -37,7 +37,6 @@ type Model struct {
 func New() Model {
 	m := Model{
 		timer: timer.New(),
-		// TODO: make this configurable
 		list: list.New(
 			"1 Minute",
 			"5 Minutes",
@@ -57,8 +56,7 @@ func New() Model {
 // Set the focus to the given model enumeration
 func (m *Model) SetFocus(f focused) {
 	m.focused = f
-
-	switch f {
+	switch m.focused {
 
 	case focusTimer:
 		m.timer.SetFocused(true)

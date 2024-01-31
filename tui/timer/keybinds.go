@@ -11,6 +11,7 @@ type KeyMap struct {
 	Quit key.Binding
 }
 
+// The default keybindings for the timer program
 var DefaultKeyMap = KeyMap{
 	Tab:  key.NewBinding(key.WithKeys("tab"), key.WithHelp("tab", "switch")),
 	Quit: key.NewBinding(key.WithKeys("q", "esc", "ctrl+c"), key.WithHelp("q", "quit")),

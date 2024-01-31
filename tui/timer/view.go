@@ -5,6 +5,7 @@ import "github.com/charmbracelet/lipgloss"
 // VIEW
 // ----
 
+// Returns the view for the timer application
 func (m Model) View() string {
 	return lipgloss.JoinVertical(lipgloss.Top,
 		m.viewComponent(),
@@ -12,6 +13,7 @@ func (m Model) View() string {
 	)
 }
 
+// Returns the view for the currently focused component
 func (m Model) viewComponent() string {
 	var s string
 
@@ -25,6 +27,7 @@ func (m Model) viewComponent() string {
 	return s
 }
 
+// Returns the help view for the currently focused component and the global help
 func (m Model) viewHelp() string {
 	var help string
 

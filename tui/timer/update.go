@@ -9,14 +9,13 @@ import (
 // UPDATE
 // ------
 
+// Handles events and messages for the timer application
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-
 	switch msg := msg.(type) {
 
 	// Window Resize Event
 	case tea.WindowSizeMsg:
-		// If we set a width on the help menu it can gracefully truncate
-		// its view as needed.
+		// If we set a width on the help menu it can gracefully truncate its view as needed
 		m.help.Width = msg.Width
 
 	// Preset Selection Event
@@ -45,14 +44,15 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	}
 
-	var cmd tea.Cmd
-	var cmds []tea.Cmd
+	var cmd tea.Cmd    // Temporary variable for holding commands returned by subcomponents' Update methods
+	var cmds []tea.Cmd // The collection of commands to return to the Bubble Tea runtime
 
+	// Update the subcomponent's model and collect its command
 	m.timer, cmd = m.timer.Update(msg)
 	cmds = append(cmds, cmd)
-
 	m.list, cmd = m.list.Update(msg)
 	cmds = append(cmds, cmd)
 
+	// Return the updated model along with the batched commands
 	return m, tea.Batch(cmds...)
 }

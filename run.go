@@ -39,10 +39,10 @@ func run(args []string, stdout io.Writer) error {
 	case "date":
 		cmd.ShowDate()
 
-	case "calendar":
+	case "cal":
 		cmd.ShowCalendar()
 
-	case "cal":
+	case "calendar":
 		calendar.Run()
 
 	case "stopwatch":

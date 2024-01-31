@@ -22,7 +22,7 @@ Shows the current date
 go-time date
 ```
 
-### `calendar`
+### `cal`
 
 Shows the calendar
 

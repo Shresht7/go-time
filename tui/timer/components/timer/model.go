@@ -1,8 +1,6 @@
 package timer
 
 import (
-	"fmt"
-
 	"github.com/charmbracelet/bubbles/help"
 	"github.com/charmbracelet/bubbles/spinner"
 	"github.com/charmbracelet/lipgloss"
@@ -74,15 +72,4 @@ func (m *Model) Reset() {
 // Set the focus state of the timer
 func (m *Model) SetFocused(f bool) {
 	m.isFocused = f
-}
-
-func (m *Model) ViewHelp() string {
-	return m.help.View(m.keys)
-}
-
-func (m *Model) FormatTime() string {
-	hours := m.remaining / 3600
-	minutes := (m.remaining - (hours * 3600)) / 60
-	seconds := m.remaining - (hours * 3600) - (minutes * 60)
-	return fmt.Sprintf("%02d:%02d:%02d", hours, minutes, seconds)
 }

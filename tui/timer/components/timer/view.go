@@ -1,6 +1,8 @@
 package timer
 
 import (
+	"fmt"
+
 	"github.com/Shresht7/go-cli-tools/status"
 	"github.com/charmbracelet/lipgloss"
 )
@@ -8,6 +10,7 @@ import (
 // VIEW
 // ----
 
+// Returns the timer component view
 func (m Model) View() string {
 	var s string
 	s += m.FormatTime()
@@ -15,6 +18,7 @@ func (m Model) View() string {
 	return lipgloss.NewStyle().Padding(1, 2).Render(s)
 }
 
+// Renders the spinner indicating the timer is running
 func (m Model) ViewProgress() string {
 	var s string
 	if m.Running {
@@ -27,4 +31,17 @@ func (m Model) ViewProgress() string {
 		}
 	}
 	return s
+}
+
+// Renders the help menu for the timer
+func (m *Model) ViewHelp() string {
+	return m.help.View(m.keys)
+}
+
+// Formats the remaining time in the format HH:MM:SS
+func (m *Model) FormatTime() string {
+	hours := m.remaining / 3600
+	minutes := (m.remaining - (hours * 3600)) / 60
+	seconds := m.remaining - (hours * 3600) - (minutes * 60)
+	return fmt.Sprintf("%02d:%02d:%02d", hours, minutes, seconds)
 }

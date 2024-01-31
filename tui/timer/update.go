@@ -1,9 +1,10 @@
 package timer
 
 import (
-	"github.com/Shresht7/go-time/tui/timer/components/list"
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
+
+	"github.com/Shresht7/go-time/tui/timer/components/list"
 )
 
 // UPDATE

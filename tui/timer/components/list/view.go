@@ -9,18 +9,19 @@ import (
 // STYLES
 // ------
 
-var boldStyle = lipgloss.NewStyle().Bold(true)
-
-var selectedStyle = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("12"))
-
-var borderStyle = lipgloss.NewStyle().
-	Border(lipgloss.RoundedBorder(), true).
-	BorderForeground(lipgloss.Color("12")).
-	Padding(1, 2)
+var (
+	boldStyle     = lipgloss.NewStyle().Bold(true)
+	selectedStyle = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("12"))
+	borderStyle   = lipgloss.NewStyle().
+			Border(lipgloss.RoundedBorder(), true).
+			BorderForeground(lipgloss.Color("12")).
+			Padding(1, 2)
+)
 
 // VIEW
 // ----
 
+// Returns the list component view
 func (m Model) View() string {
 	s := lipgloss.JoinVertical(lipgloss.Top,
 		m.ViewPrompt(),
@@ -29,10 +30,12 @@ func (m Model) View() string {
 	return borderStyle.Render(s)
 }
 
+// Renders the prompt message for the list component
 func (m Model) ViewPrompt() string {
 	return boldStyle.Render(m.prompt)
 }
 
+// Renders the list of items for the list component
 func (m Model) ViewList() string {
 	var s string
 	for i, item := range m.items {

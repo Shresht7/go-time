@@ -11,6 +11,7 @@ type KeyMap struct {
 	Reset key.Binding
 }
 
+// The default keybindings for the timer subcomponent
 var DefaultKeyMap = KeyMap{
 	Space: key.NewBinding(key.WithKeys("s", " "), key.WithHelp("spacebar", "start")),
 	Reset: key.NewBinding(key.WithKeys("r"), key.WithHelp("r", "reset")),

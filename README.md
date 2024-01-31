@@ -2,6 +2,9 @@
 
 A clock for the terminal.
 
+![time](./screenshots/time.png)
+![calendar](/screenshot.png)
+
 ## Commands
 
 ### `time`
@@ -14,6 +17,8 @@ go-time now
 go-time time
 ```
 
+![time](./screenshots/time.png)
+
 ### `date`
 
 Shows the current date
@@ -21,6 +26,8 @@ Shows the current date
 ```sh
 go-time date
 ```
+
+![time](./screenshots/date.png)
 
 ### `cal`
 
@@ -30,7 +37,7 @@ Shows the calendar
 go-time calendar
 ```
 
-![calendar](/screenshot.png)
+![calendar](./screenshots/calendar.png)
 
 ## TUI
 
@@ -42,6 +49,8 @@ Shows the clock
 go-time clock
 ```
 
+![clock](./screenshots/time.png)
+
 ### `calendar`
 
 Shows the calendar
@@ -49,6 +58,8 @@ Shows the calendar
 ```sh
 go-time cal
 ```
+
+![calendar](./screenshots/calendar.png)
 
 ## `stopwatch`
 
@@ -58,6 +69,8 @@ Shows the stopwatch
 go-time stopwatch
 ```
 
+![stopwatch](./screenshots/stopwatch.png)
+
 ## `timer`
 
 Shows the timer
@@ -65,6 +78,8 @@ Shows the timer
 ```sh
 go-time timer
 ```
+
+![timer](./screenshots/timer.png)
 
 ---
 
